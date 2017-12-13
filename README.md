@@ -1,3 +1,3 @@
 # api
 
-Example: see [exemple_uri.js](http://github.com/klymbr/api/exemple_uri.js)
+Example: see [exemple_uri.js](https://github.com/KlymbR/api/blob/master/exemple_uri.js)
