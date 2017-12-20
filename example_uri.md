@@ -1,27 +1,29 @@
 # URL api mobile klymbr
 
-// Url utilisateurs et authentification
 
-/api.klymbr.com/users/
-
+**Url utilisateurs et authentification**
 ###### GET :
 ```
+api.klymbr.com/users/
+
 {"_id": "user id"}
 ```
-
-- Example :  /users/?_id=83zedj
+- Example :
 
 ```
+/users/?_id=83zedjsdze87xsjs87
+
 {
   "firstname": "Zackary",
   "lastname": "B",
   "phone": "0689876787",
-  "genre": "sex",
+  "genre": "Monsieur",
   "birthdate":  {"$date": 1512980682785},
   "licencenbr": 4567890,
   "licences": [
-    {"clubname": "Toto's club", "clubnb": 123123, "fednb": 1210, "enddate": {"$date": 1512980682785}, "status": "Climlbing n°5"},
-    {}
+    {"clubname": "Toto's club", "clubnb": 123123, "fednb": 1210,
+    "enddate": {"$date": 1512980682785},
+    "status": "Climlbing n°5"},
   ],
 	"address": {
     "rue": "Rue du stade",

@@ -1,3 +1,3 @@
 # api
 
-Example: see [example_uri](api/example_uri.md)
+Example: see [example_uri](./example_uri.md)
