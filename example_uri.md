@@ -2,6 +2,25 @@
 
 
 **Url utilisateurs et authentification**
+
+
+###### Post :
+- Envoyé pour se connecter.
+```
+api.klymbr.com/auth/
+
+{"_id": "user id", "password": "password"}
+```
+
+###### GET :
+- Renvoyé à chaque requete par le client dans le header de la requete.
+```
+api.klymbr.com/auth/
+
+{"_id": "user id", "token": "tokenhashsession"}
+```
+
+
 ###### GET :
 ```
 api.klymbr.com/users/
@@ -14,22 +33,26 @@ api.klymbr.com/users/
 /users/?_id=83zedjsdze87xsjs87
 
 {
-  "firstname": "Zackary",
-  "lastname": "B",
-  "phone": "0689876787",
-  "genre": "Monsieur",
-  "birthdate":  {"$date": 1512980682785},
-  "licencenbr": 4567890,
-  "licences": [
-    {"clubname": "Toto's club", "clubnb": 123123, "fednb": 1210,
-    "enddate": {"$date": 1512980682785},
-    "status": "Climlbing n°5"},
-  ],
-	"address": {
+"firstname": "Kevin",
+"lastname": "Barre",
+"phone": "699709887",
+"genre": "Monsieur",
+"birthday":  {\"\$date\": 1512980682785},
+"licenceNbr": "4567890",
+"licences": [
+                {
+                "clubname": "Toto's club",
+                "clubnb": "123123",
+                "fednb": "1210",
+                "enddate": {\"\$date\": 1512980682785},
+                "status": "Climlbing n°5"
+                }
+],
+"address": {
     "rue": "Rue du stade",
     "postalcode": "04100",
-  	"city": "Manosque",
-  }
+    "city": "Manosque"
+    }
 }
 ```
 
@@ -54,22 +77,18 @@ api.klymbr.com/users/
 
 
 
-// CrymbingRoom
+### CrymbingRoom
+**Information sur les salles d'escalades.**
 
-GET:
-{"_id": "room_id"}
+###### GET :
+- Récuperer les voies.
 
-// /room/?_id=xxxxxxxxxxxxxxxxxxx
+```
+api.klymbr.com/ways/
 
-return:
 {
-	"":"",
-  "":
-  "":
-  "":
-  "":
-  "":
+
 }
 
-// club
-// /club/?clubnb=xxxxxxxxxxxxxxxxx
+
+```
