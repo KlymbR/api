@@ -30,7 +30,7 @@ api.klymbr.com/users/
 - Example :
 
 ```
-/users/?_id=83zedjsdze87xsjs87
+/users/?_id=4567890
 
 {
 "firstname": "Kevin",
@@ -59,36 +59,160 @@ api.klymbr.com/users/
 
 ###### POST :
 - Modify
-- /users/?_id=83zedj&Kepxs98xzzc
+```
+api.klymbr.com/users/?_id=4567890
+// header
 
-// OK
-{}
+{"_id": "4567890"}
 
-// Create
-// /users/
-// OK
-
-{"_id": "5693ry5cdj@oyi6"}
-
-// ERROR
+//paramètres
 {
-  "firstname": {"ERROR": "Trop de caractere"}
+  "firstname": "Jean"
 }
+```
 
 
 
 ### CrymbingRoom
-**Information sur les salles d'escalades.**
+**Information sur la salle d'escalade.**
 
+#### Récuperer les voies.
 ###### GET :
-- Récuperer les voies.
 
 ```
 api.klymbr.com/ways/
 
 {
-
+    "ways": [
+     {
+        "wayNbr": 5,
+        "difficulty": "C5",
+        "personaBestTime": {
+          "time": 72,
+          "\$date\": 1512980682785
+        },
+        "bestTime": {
+          "time" :  65,
+          "firstname": "Jhon",
+          "lastname": "Travolta",
+          "\$date\": 1512980682785
+        },
+        "disponibility": "Occupé"
+     },
+     {
+        "wayNbr": 1,
+        "difficulty": "A1",
+        "personaBestTime": {
+          "time": 72,
+          "\$date\": 1512980682785
+        },
+        "bestTime": {
+          "time" :  65,
+          "firstname": "Jhon",
+          "lastname": "Travolta",
+          "\$date\": 1512980682785
+        },
+        "disponibility": "Libre"
+     },
+     {
+        "wayNbr": 2,
+        "difficulty": "B1",
+        "personaBestTime": {
+          "time": 72,
+          "\$date\": 1512980682785
+        },
+        "bestTime": {
+          "time" :  65,
+          "firstname": "Jhon",
+          "lastname": "Travolta",
+          "\$date\": 1512980682785
+        },
+        "disponibility": "Libre"
+     },
+     {
+        "wayNbr": 3,
+        "difficulty": "B2",
+        "personaBestTime": {
+          "time": 72,
+          "\$date\": 1512980682785
+        },
+        "bestTime": {
+          "time" :  65,
+          "firstname": "Jhon",
+          "lastname": "Travolta",
+          "\$date\": 1512980682785
+        },
+        "disponibility": "Libre"
+     },
+     {
+        "wayNbr": 4,
+        "difficulty": "C1",
+        "personaBestTime": {
+          "time": 72,
+          "\$date\": 1512980682785
+        },
+        "bestTime": {
+          "time" :  65,
+          "firstname": "Jhon",
+          "lastname": "Travolta",
+          "\$date\": 1512980682785
+        },
+        "disponibility": "Libre"
+     },
+     {
+        "wayNbr": 6,
+        "difficulty": "K1",
+        "personaBestTime": {
+          "time": 72,
+          "\$date\": 1512980682785
+        },
+        "bestTime": {
+          "time" :  65,
+          "firstname": "Jhon",
+          "lastname": "Travolta",
+          "\$date\": 1512980682785
+        },
+        "disponibility": "Libre"
+     },
+     {
+        "wayNbr": 7,
+        "difficulty": "A1",
+        "personaBestTime": {
+          "time": 72,
+          "\$date\": 1512980682785
+        },
+        "bestTime": {
+          "time" :  65,
+          "firstname": "Jhon",
+          "lastname": "Travolta",
+          "\$date\": 1512980682785
+        },
+        "disponibility": "Libre"
+     },
+     {
+        "wayNbr": 8,
+        "difficulty": "A1",
+        "personaBestTime": {
+          "time": 72,
+          "\$date\": 1512980682785
+        },
+        "bestTime": {
+          "time" :  65,
+          "firstname": "Jhon",
+          "lastname": "Travolta",
+          "\$date\": 1512980682785
+        },
+        "disponibility": "Occupé"
+     }
+    ]
 }
+```
 
-
+#### Acceder à une voie
+###### POSTS :
+```
+api.klymbr.com/ways/
+{
+    "wayNbr": 5,
+}
 ```
