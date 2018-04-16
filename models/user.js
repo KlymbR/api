@@ -5,66 +5,123 @@ var bcrypt = require('bcrypt')
 
 var userSchema = new mongoose.Schema({
   id: {
-    type: Number
+    type: Number,
+    unique: true,
+    required: true,
+    trim: true
   },
   hashPassword: {
-    type: String
+    type: String,
+    unique: false,
+    required: true,
+    trim: true
   },
   firstName: {
-    type: String
+    type: String,
+    unique: false,
+    required: true,
+    trim: true
   },
   lastName: {
-    type: String
+    type: String,
+    unique: false,
+    required: true,
+    trim: true
   },
   email: {
-    type: String
+    type: String,
+    unique: true,
+    required: true,
+    trim: true
   },
   phone: {
-    type: String
+    type: String,
+    unique: true,
+    required: true,
+    trim: true
   },
   gender: {
-    type: Number
+    type: Number,
+    unique: false,
+    required: true,
+    trim: true
   },
-  birthday: {
-    type: Date
+  birthdate: {
+    type: Date,
+    unique: false,
+    required: true,
+    trim: true
   },
   licenses: {
     type: Array,
     licenseNbr: {
-      type: Number
+      type: Number,
+      unique: false,
+      required: true,
+      trim: true
     },
     clubName: {
-      type: String
+      type: String,
+      unique: false,
+      required: true,
+      trim: true
     },
     clubIb: {
-      type: Number
+      type: Number,
+      unique: false,
+      required: true,
+      trim: true
     },
     fedIb: {
-      type: Number
+      type: Number,
+      unique: false,
+      required: true,
+      trim: true
     },
     endDate: {
-      type: Date
+      type: Date,
+      unique: false,
+      required: true,
+      trim: true
     },
     status: {
-      type: Number
+      type: Number,
+      unique: false,
+      required: true,
+      trim: true
     }
   },
   address: {
     number: {
-      type: Number
+      type: Number,
+      unique: false,
+      required: true,
+      trim: true
     },
     street: {
-      type: String
+      type: String,
+      unique: false,
+      required: true,
+      trim: true
     },
     postalCode: {
-      type: Number
+      type: Number,
+      unique: false,
+      required: true,
+      trim: true
     },
     city: {
-      type: String
+      type: String,
+      unique: false,
+      required: true,
+      trim: true
     }
   },
   createdDate: {
-    type: Date
+    type: Date,
+    unique: false,
+    required: true,
+    trim: true
   }
 })
 

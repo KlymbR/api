@@ -24,6 +24,7 @@
       "resolved": "https://registry.npmjs.org/async/-/async-2.1.4.tgz",
       "version": "2.1.4"
     },
+    "axios": "^0.18.0",
     "bcrypt": "^1.0.3",
     "bluebird": {
       "integrity": "sha1-eRQg1/VR7qKJdFOop3ZT+WYG1nw=",
@@ -57,6 +58,7 @@
       "resolved": "https://registry.npmjs.org/bytes/-/bytes-3.0.0.tgz",
       "version": "3.0.0"
     },
+    "circular-json": "^0.5.3",
     "compressible": {
       "integrity": "sha1-xZpcmdt2dn6YdlAOJx72OzSTvWY=",
       "requires": {

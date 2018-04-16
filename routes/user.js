@@ -70,8 +70,7 @@ router.post('/user/update', function (req, se) {
   }, {
     '$set': {
       email: req.body.email,
-      phone: req.body.phone,
-      licences: req.body.licenses
+      phone: req.body.phone
     }
   })
     .exec(function (err, res) {

@@ -37,6 +37,7 @@ app.use(function (req, res, next) {
 
 // routes
 app.use('/', require('./routes/user'))
+app.use('/', require('./routes/path'))
 
 // basic 404 handler
 app.use((req, res) => {
