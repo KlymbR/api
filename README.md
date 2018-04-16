@@ -1,15 +1,15 @@
-#api
+# api
 
-##Authentification
+## Authentification
 Requêtes d'enregistrement et de connexion de cette api.
 
-###Enregistrement
+### Enregistrement
 Pour enregistrer un nouvel utilisateur.
 
-####Requête
+#### Requête
 `POST localhost:3001/auth/register`
 
-####Corps
+#### Corps
 `{  
 	"id": 1,  
 	"password": "toto",  
@@ -35,7 +35,7 @@ Pour enregistrer un nouvel utilisateur.
 	}  
 }`
 
-####Réponse
+#### Réponse
 `200 OK`  
 
 `{  
@@ -67,41 +67,41 @@ Pour enregistrer un nouvel utilisateur.
     "__v": 0  
 }`
 
-###Connection
+### Connection
 Pour se connecter en tant qu'utilisateur.
 
-####Requête
+#### Requête
 `POST api.klymbr.com/sign_in/`
 
-####Corps
+#### Corps
 `{  
   "email": "adocquin@outlook.com",  
   "password": "toto"  
 }`
 
-####Réponse
+#### Réponse
 `200 OK`  
 
 `{  
     "token":   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkb2NxdWluQG91dGxvb2suY29tIiwiX2lkIjoiNWFkNDk0MjViZWEwYWIyZGI4ZmEzYjkxIiwiaWF0IjoxNTIzODgxMTk5fQ.BXEqIIM3NtfF87sJUIi0Qpd1mwKE7Bu-9XeeEQslgGU"  
 }`
 
-##Requêtes
+## Requêtes
 Ensemble des requêtes de cette api.
 
-###Header
+### Header
 **A mettre dans le header de chaque requêtes.**
 
 `Content-Type: application/json  
 Authorization: "JWT" + token`
 
-###Obtenir un utilisateur
+### Obtenir un utilisateur
 Pour obtenir un utilisateur par son id.
 
-####Requête
+#### Requête
 `localhost:3001/user?id=1`
 
-####Réponse
+#### Réponse
 `200 OK`  
 
 `{  
@@ -134,28 +134,28 @@ Pour obtenir un utilisateur par son id.
     "__v": 0  
 }`
 
-###Modifier les infos d'un utilisateur
+### Modifier les infos d'un utilisateur
 Pour modifier les informations d'un utilisateur: téléphone, email
 
-####Requête
+#### Requête
 `POST localhost:3001/user/update`
-####Corps
+#### Corps
 `{  
 	"id":1,  
 	"email":"test@mail.com",  
 	"phone":"+33611223344"  
 }`
 
-####Réponse
+#### Réponse
 `200 OK`
 
-###Obtenir les voies
+### Obtenir les voies
 Pour obtenir les informations des voies.
 
-####Requête
+#### Requête
 `GET localhost:3001/path/all`
 
-####Réponse
+#### Réponse
 `200 OK`  
 
 `[  
@@ -179,13 +179,13 @@ Pour obtenir les informations des voies.
     }  
 ]`
 
-###Obtenir une voie
+### Obtenir une voie
 Pour obtenir les informations d'une voie avec son id
 
-####Requête
+#### Requête
 `localhost:3001/path?path_id=1`
 
-####Réponse
+#### Réponse
 `200 OK`  
 
 `[  
@@ -209,17 +209,17 @@ Pour obtenir les informations d'une voie avec son id
     }  
 ]`
 
-###Occuper / Libérer une voie
+### Occuper / Libérer une voie
 Pour modifier l'état libre d'une voie.
 
-####Requête
+#### Requête
 `localhost:3001/path/free`
 
-####Corps
+#### Corps
 `{  
 	"path_id": 1,  
 	"path_free": false  
 }`
 
-####Réponse
+#### Réponse
 `200 OK`
