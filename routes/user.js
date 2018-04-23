@@ -65,6 +65,9 @@ router.get('/user', function (req, se) {
 
 // update user information
 router.post('/user/update', function (req, se) {
+  if (!req.user) {
+    return se.status(401).json({ message: 'Unauthorized user!' })
+  }
   User.findOneAndUpdate({
     id: req.body.id
   }, {
@@ -82,6 +85,28 @@ router.post('/user/update', function (req, se) {
       if (!res) {
         se.sendStatus(204)
       } else {
+        se.sendStatus(200)
+      }
+    })
+})
+
+// delete a user
+router.post('/user/delete', function (req, se) {
+  if (!req.user) {
+    return se.status(401).json({ message: 'Unauthorized user!' })
+  }
+  User.findOne(
+    {id: req.body.id})
+    .exec(function (err, res) {
+      if (err) {
+        console.log(err)
+        se.status(500).send(err)
+        return err
+      }
+      if (!res) {
+        se.sendStatus(204)
+      } else {
+        res.remove()
         se.sendStatus(200)
       }
     })

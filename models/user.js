@@ -122,6 +122,12 @@ var userSchema = new mongoose.Schema({
     unique: false,
     required: true,
     trim: true
+  },
+  isAdmin: {
+    type: Boolean,
+    unique: false,
+    required: true,
+    trim: true
   }
 })
 
