@@ -1,7 +1,7 @@
 # api
 
 ## A faire
-Pour accéder aux fonctionnalités à implémenter: [A faire](ToDo.md)
+Pour accéder aux fonctionnalités à implémenter: [Liste des fonctionnalités](TODO.md)
 
 ## Configuration
 Pour changer l'adresse de l'API il faut modifier les valeurs des variables holdsUrl et holdsPort dans le fichier `routes/path.js`.  

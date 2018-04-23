@@ -4,14 +4,14 @@
 
 ### modification compte:
 - date de naissance
-- nom prenom
+- nom prenom  
 `{`
       `"id": id,`  
       `"title": title,`  
       `"latitude": latitude,`  
       `"longitude": longitude,`  
 `}`  
-`title = adresse`  
+title = adresse  
 
 ## Statistiques voie:
 - temps moyen
