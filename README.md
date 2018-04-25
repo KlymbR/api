@@ -43,37 +43,7 @@ Pour enregistrer un nouvel utilisateur.
 `}`
 
 #### Réponse
-`200 OK`  
-
-`{`  
-    `"address": {`  
-        `"number": 43,`  
-        `"street": "totoStreet",`  
-        `"postalCode": 78800,`  
-        `"city": "Houilles"`  
-    `},`  
-    `"licenses": [`  
-        `{`  
-            `"licenseNbr": 1234,`  
-            `"clubName": "totoScalade",`  
-            `"clubId": 1,`  
-            `"fedId": 1,`  
-            `"endDate": "1994-06-28",`  
-            `"status": 1`  
-        `}`  
-    `],`  
-    `"_id": "5ad49425bea0ab2db8fa3b91",`  
-    `"id": 1,`  
-    `"firstName": "Avel",`  
-    `"lastName": "Docquin",`  
-    `"email": "adocquin@outlook.com",`  
-    `"phone": "+33624350681",`  
-    `"gender": 1,`  
-    `"birthdate": "1994-06-28T00:00:00.000Z",`  
-    `"createdDate": "2018-04-16T12:16:37.847Z",`  
-		`"isAdmin": False`  
-    `"__v": 0`  
-`}`
+`201 Created`
 
 ### Connection
 Pour se connecter en tant qu'utilisateur.

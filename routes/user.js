@@ -18,8 +18,7 @@ router.post('/auth/register', function (req, res) {
         message: err
       })
     } else {
-      newUser.hashPassword = undefined
-      return res.json(newUser)
+      res.sendStatus(201)
     }
   })
 })
