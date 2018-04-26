@@ -260,6 +260,7 @@
       "resolved": "https://registry.npmjs.org/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz",
       "version": "1.0.2"
     },
+    "morgan": "^1.9.0",
     "mpath": {
       "integrity": "sha1-elj3iem1/TyUUgY0FXlg8mvV70Q=",
       "resolved": "https://registry.npmjs.org/mpath/-/mpath-0.3.0.tgz",

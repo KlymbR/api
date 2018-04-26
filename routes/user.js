@@ -1,13 +1,15 @@
 'use strict'
 
 var express = require('express')
-var router = express.Router()
+var routerBeforeAuth = express.Router()
+var routerAfterAuth = express.Router()
 var bcrypt = require('bcrypt')
 var jwt = require('jsonwebtoken')
 var User = require('../models/user')
+const config = require('../config')
 
 // register a new user
-router.post('/auth/register', function (req, res) {
+routerBeforeAuth.post('/auth/register', function (req, res) {
   var newUser = new User(req.body)
   newUser.hashPassword = bcrypt.hashSync(req.body.password, 10)
   newUser.createdDate = Date.now()
@@ -24,7 +26,7 @@ router.post('/auth/register', function (req, res) {
 })
 
 // sign_in a user
-router.post('/auth/sign_in', function (req, res) {
+routerBeforeAuth.post('/auth/sign_in', function (req, res) {
   User.findOne({
     email: req.body.email
   }, function (err, user) {
@@ -35,19 +37,22 @@ router.post('/auth/sign_in', function (req, res) {
       if (!user.comparePassword(req.body.password)) {
         res.status(401).json({ message: 'Authentication failed. Wrong password.' })
       } else {
-        return res.json({token: jwt.sign({email: user.email, fullName: user.fullName, _id: user._id}, 'RESTFULAPIs')})
+        const token = jwt.sign({ email: user.email, fullName: user.fullName, _id: user._id }, config.secret)
+        res.cookie('token', token)
+        res.set('Authorization', token)
+        return res.json({ 
+          success: true,
+          token: token
+        })
       }
     }
   })
 })
 
-// get a user by his id
-router.get('/user', function (req, se) {
-  if (!req.user) {
-    return se.status(401).json({ message: 'Unauthorized user!' })
-  }
+// get a user
+routerAfterAuth.get('/user', function (req, se) {
   User.findOne({
-    id: req.query.id
+    email: req.user.email
   }, function (err, user) {
     if (err) {
       console.log(err)
@@ -63,18 +68,15 @@ router.get('/user', function (req, se) {
 })
 
 // update user information
-router.post('/user/update', function (req, se) {
-  if (!req.user) {
-    return se.status(401).json({ message: 'Unauthorized user!' })
-  }
+routerAfterAuth.patch('/user/update', function (req, se) {
   User.findOneAndUpdate({
     id: req.body.id
   }, {
-    '$set': {
-      email: req.body.email,
-      phone: req.body.phone
-    }
-  })
+      '$set': {
+        email: req.body.email,
+        phone: req.body.phone
+      }
+    })
     .exec(function (err, res) {
       if (err) {
         console.log(err)
@@ -90,17 +92,13 @@ router.post('/user/update', function (req, se) {
 })
 
 // delete a user
-router.post('/user/delete', function (req, se) {
-  if (!req.user) {
-    return se.status(401).json({ message: 'Unauthorized user!' })
-  }
+routerAfterAuth.delete('/user/delete/:id', function (req, se) {
   User.findOne(
-    {id: req.body.id})
+    { id: req.params.id })
     .exec(function (err, res) {
       if (err) {
         console.log(err)
-        se.status(500).send(err)
-        return err
+        return se.status(500).send(err)
       }
       if (!res) {
         se.sendStatus(204)
@@ -111,4 +109,7 @@ router.post('/user/delete', function (req, se) {
     })
 })
 
-module.exports = router
+module.exports = {
+ bAuth: routerBeforeAuth,
+ aAuth: routerAfterAuth
+}
