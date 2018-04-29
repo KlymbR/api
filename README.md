@@ -77,7 +77,7 @@ Ensemble des requêtes de cette api.
 Pour obtenir un utilisateur par son id.
 
 #### Requête
-`localhost:3001/user?id=1`
+`localhost:3001/user
 
 #### Réponse
 `200 OK`  
@@ -117,7 +117,7 @@ Pour obtenir un utilisateur par son id.
 Pour modifier les informations d'un utilisateur: téléphone, email
 
 #### Requête
-`POST localhost:3001/user/update`
+`PATCH localhost:3001/user/update`
 
 #### Corps
 `{`  
@@ -133,7 +133,7 @@ Pour modifier les informations d'un utilisateur: téléphone, email
 Pour supprimer un utilisateur
 
 ### Requête
-`POST localhost:3001/user/delete`
+`DELETE localhost:3001/user/delete`
 
 ### Corps
 `{`  
