@@ -77,7 +77,7 @@ Ensemble des requêtes de cette api.
 Pour obtenir un utilisateur par son id.
 
 #### Requête
-`localhost:3001/user
+`localhost:3001/user`
 
 #### Réponse
 `200 OK`  
@@ -113,8 +113,51 @@ Pour obtenir un utilisateur par son id.
     `"__v": 0`  
 `}`
 
+### Obtenir les utilisateurs avec une license particulière
+Pour obtenir la liste des utilisateurs ayant une license particulière.  
+Se réfère aux clubId des licences.  
+Cette commande est réservée aux administrateurs.
+
+#### Requête
+`GET localhost:3001/user/license?clubId=1`
+
+#### Réponse
+`200 OK`  
+
+`{`  
+    `"address": {`  
+        `"number": 43,`  
+        `"street": "totoStreet",`  
+        `"postalCode": 78800,`  
+        `"city": "Houilles"`  
+    `},`  
+    `"licenses": [`  
+        `{`  
+            `"licenseNbr": 1234,`  
+            `"clubName": "totoScalade",`  
+            `"clubId": 1,`  
+            `"fedId": 1,`  
+            `"endDate": "1994-06-28",`  
+            `"status": 1`  
+        `}`  
+    `],`  
+    `"_id": "5ad49425bea0ab2db8fa3b91",`  
+    `"id": 1,`  
+    `"firstName": "Avel",`  
+    `"lastName": "Docquin",`  
+    `"email": "adocquin@outlook.com",`  
+    `"phone": "+33624350681",`  
+    `"gender": 1,`  
+    `"birthdate": "1994-06-28T00:00:00.000Z",`  
+    `"hashPassword":   "$2a$10$f0ku35V5rSQcWMAtKMj5Uu1J9Fa0c1h9OSY1f7VvatZ8gVNqSddhO",`  
+    `"createdDate": "2018-04-16T12:16:37.847Z",`  
+		`"isAdmin": False`  
+    `"__v": 0`  
+`}`
++ les autres utilisateurs avec ce format
+
 ### Modifier les infos d'un utilisateur
-Pour modifier les informations d'un utilisateur: téléphone, email
+Pour modifier les informations d'un utilisateur: téléphone, email, prénom, nom de famille
 
 #### Requête
 `PATCH localhost:3001/user/update`
@@ -124,13 +167,16 @@ Pour modifier les informations d'un utilisateur: téléphone, email
 	`"id":1,`  
 	`"email":"test@mail.com",`   
 	`"phone":"+33611223344"`  
+	`"firstName":"Avel"`  
+	`"lastName":"Docquin"`  
 `}`
 
 #### Réponse
 `200 OK`
 
 ### Supprimer un utilisateur
-Pour supprimer un utilisateur
+Pour supprimer un utilisateur.  
+Cette commande est réservée aux administrateurs.
 
 ### Requête
 `DELETE localhost:3001/user/delete`
@@ -207,13 +253,57 @@ Pour obtenir les informations d'une voie avec son id
 Pour modifier l'état libre d'une voie.
 
 #### Requête
-`localhost:3001/path/free`
+`POST localhost:3001/path/free`
 
 #### Corps
 `{`  
 	`"path_id": 1,`  
 	`"path_free": false`  
 `}`
+
+#### Réponse
+`200 OK`
+
+### Ajouter une nouvelle salle d'escalade
+Pour ajouter une nouvelle salle d'escalade.  
+Cette commande est réservée aux administrateurs.
+
+#### Requête
+`POST localhost:3001/climbingRoom/add`
+
+#### Corps
+`{`  
+	`"title":"totoScalade",`  
+	`"latitude":437,`  
+	`"longitude":183`  
+`}`
+
+#### Réponse
+`201 Created`
+
+### Obtenir une salle d'escalade
+Pour obtenir une salle d'escalade avec son title.
+
+#### Requête
+`GET localhost:3001/climbingRoom?title=totoScalade`
+
+#### Réponse
+`200 OK`
+
+`{`  
+	`"_id": "5ae9bacba0617f3a64b1c67f",`  
+	`"title":"totoScalade",`  
+	`"latitude":437,`  
+	`"longitude":183,`  
+	`"__v": 0`  
+`}`
+
+### Supprimer une salle d'escalade
+Pour supprimer une salle d'escalade avec son title.  
+Cette commande est réservée aux administrateurs.
+
+### Requête
+`DELETE localhost:3001/climbingRoom/delete/totoScalade`
 
 #### Réponse
 `200 OK`

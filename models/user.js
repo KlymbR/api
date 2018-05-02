@@ -66,13 +66,13 @@ var userSchema = new mongoose.Schema({
       required: true,
       trim: true
     },
-    clubIb: {
+    clubId: {
       type: Number,
       unique: false,
       required: true,
       trim: true
     },
-    fedIb: {
+    fedId: {
       type: Number,
       unique: false,
       required: true,
