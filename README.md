@@ -38,8 +38,8 @@ Pour enregistrer un nouvel utilisateur.
 		`"street": "totoStreet",`  
 		`"postalCode": "78800",`  
 		`"city": "Houilles"`  
-	`}`  
-	`"isAdmin": False`  
+	`},`  
+	`"isAdmin": false`  
 `}`
 
 #### Réponse
@@ -109,7 +109,7 @@ Pour obtenir un utilisateur par son id.
     `"birthdate": "1994-06-28T00:00:00.000Z",`  
     `"hashPassword":   "$2a$10$f0ku35V5rSQcWMAtKMj5Uu1J9Fa0c1h9OSY1f7VvatZ8gVNqSddhO",`  
     `"createdDate": "2018-04-16T12:16:37.847Z",`  
-		`"isAdmin": False`  
+		`"isAdmin": false`  
     `"__v": 0`  
 `}`
 
@@ -151,7 +151,7 @@ Cette commande est réservée aux administrateurs.
     `"birthdate": "1994-06-28T00:00:00.000Z",`  
     `"hashPassword":   "$2a$10$f0ku35V5rSQcWMAtKMj5Uu1J9Fa0c1h9OSY1f7VvatZ8gVNqSddhO",`  
     `"createdDate": "2018-04-16T12:16:37.847Z",`  
-		`"isAdmin": False`  
+		`"isAdmin": false`  
     `"__v": 0`  
 `}`
 + les autres utilisateurs avec ce format
