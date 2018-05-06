@@ -49,7 +49,7 @@ Pour enregistrer un nouvel utilisateur.
 Pour se connecter en tant qu'utilisateur.
 
 #### Requête
-`POST api.klymbr.com/sign_in/`
+`POST api.klymbr.com/auth/sign_in/`
 
 #### Corps
 `{  
