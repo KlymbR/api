@@ -17,7 +17,7 @@ router.get('/stat', function (req, se) {
       if (!res) {
         se.status(204).json({
           success: false,
-          message: 'Stat not found.'
+          message: 'No stats.'
         })
       } else {
         se.status(201).json({

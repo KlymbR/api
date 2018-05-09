@@ -82,6 +82,33 @@ routerAfterAuth.get('/user', function (req, se, next) {
   })
 })
 
+// get all user
+routerAfterAuth.get('/user/all', function (req, se, next) {
+  isAdmin(req.user._id, (err, resp) => {
+    if (err) return next(err)
+    else {
+      User.find({}, (err, res) => {
+        if (err) {
+          console.log(err)
+          se.status(500).send(err)
+          return err
+        }
+        if (!res) {
+          se.status(204).json({
+            success: false,
+            message: 'No users.'
+          })
+        } else {
+          se.status(201).json({
+            success: true,
+            result: res
+          })
+        }
+      })
+    }
+  })
+})
+
 // Admin only
 // get all users with specific club Id license
 routerAfterAuth.get('/user/license', function (req, se, next) {

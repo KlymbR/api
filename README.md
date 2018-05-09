@@ -130,6 +130,52 @@ Pour obtenir un utilisateur par son id.
 }
 ```
 
+### Obtenir tous les utilisateurs
+Pour obtenir tous les utilisateurs.  
+Cette commande est réservée aux administrateurs.
+
+#### Requête
+`GET localhost:3001/user/all`
+
+#### Réponse
+`200 OK`  
+
+```json
+{
+    "success": true,
+    "result": {
+        "address": {
+            "number": 43,
+            "street": "totoStreet",
+            "postalCode": 78800,
+            "city": "Houilles"
+        },
+        "licenses": [
+            {
+                "licenseNbr": 1234,
+                "clubName": "totoScalade",
+                "clubId": 1,
+                "fedId": 1,
+                "endDate": "1994-06-28",
+                "status": 1
+            }
+        ],
+        "_id": "5af2e2a543a8cb0c35af08b7",
+        "firstName": "Avel",
+        "lastName": "Docquin",
+        "email": "adocquin@outlook.com",
+        "phone": "+33624350681",
+        "gender": 1,
+        "birthdate": "1994-06-28T00:00:00.000Z",
+        "isAdmin": false,
+        "hashPassword": "$2a$10$JOF9OZtPP3mBy9MmrljoMeuZq8GIj8/gqey2aIM4A7P.nI1Bqe2ne",
+        "createdDate": "2018-05-09T11:59:33.272Z",
+        "__v": 0
+    }  
+		[...]  
+}
+```
+
 ### Obtenir les utilisateurs avec une license particulière
 Pour obtenir la liste des utilisateurs ayant une license particulière.  
 Se réfère aux clubId des licences.  
@@ -513,7 +559,7 @@ Pour obtenir les statistiques d'une voie.
 ```
 
 ### Ajouter une statistique
-Pour ajouter une statistique d'une voie.
+Pour ajouter une statistique d'une voie.  
 Cette commande est réservée aux administrateurs.
 
 #### Requête
@@ -577,7 +623,7 @@ Pour modifier une statistique d'une voie.
 ```
 
 ### Supprimer une statistique
-Pour supprimer une statistique d'une voie.
+Pour supprimer une statistique d'une voie.  
 Cette commande est réservée aux administrateurs.
 
 #### Requête
