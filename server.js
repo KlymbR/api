@@ -53,6 +53,7 @@ app.use(function (req, res, next) {
 app.use('/', require('./routes/user').aAuth)
 app.use('/', require('./routes/path'))
 app.use('/', require('./routes/climbingRoom'))
+app.use('/', require('./routes/stat'))
 
 // basic 404 handler
 app.use((req, res) => {
@@ -63,7 +64,7 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   console.error(err)
   res.status(err.code || 500).json({
-    success : false,
+    success: false,
     message: err.message || 'Something broke!'
   })
 })

@@ -8,7 +8,6 @@ var jwt = require('jsonwebtoken')
 var User = require('../models/user')
 const config = require('../config')
 var isAdmin = require('../functions/isAdmin.js')
-const mongoose = require("mongoose")
 
 // register a new user
 routerBeforeAuth.post('/auth/register', function (req, res, next) {
@@ -17,11 +16,12 @@ routerBeforeAuth.post('/auth/register', function (req, res, next) {
   newUser.createdDate = Date.now()
   newUser.save(function (err, user) {
     if (err) return next(err)
-    else
+    else {
       res.status(201).json({
         success: true,
-        message: "Created"
+        message: 'Created'
       })
+    }
   })
 })
 
@@ -63,17 +63,18 @@ routerAfterAuth.get('/user', function (req, se, next) {
     '_id': req.user._id
   }, function (err, user) {
     if (err) return next(err)
-    if (!user)
+    if (!user) {
       return next({
         code: 404,
         success: false,
-        message: "User not found"
+        message: 'User not found'
       })
-    else
+    } else {
       se.status(200).send({
         success: true,
         result: user
       })
+    }
   })
 })
 
@@ -92,16 +93,18 @@ routerAfterAuth.get('/user/license', function (req, se, next) {
         }
       }).exec(function (err, user) {
         if (err) return next(err)
-        if (!user) return next({
-          code: 404,
-          success: false,
-          message: "Users not found"
-        })
-        else
+        if (!user) {
+          return next({
+            code: 404,
+            success: false,
+            message: 'Users not found'
+          })
+        } else {
           se.status(201).send({
             success: true,
             result: user
           })
+        }
       })
     }
   })
@@ -112,26 +115,27 @@ routerAfterAuth.patch('/user/update', function (req, se, next) {
   User.findOneAndUpdate({
     _id: req.user._id
   }, {
-      '$set': {
-        email: req.body.email,
-        phone: req.body.phone,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName
-      }
-    }, { new: true }, (function (err, res) {
-      if (err) return next(err)
-      if (!res)
-        return next({
-          code: 204,
-          success: true,
-          message: "Updated"
-        })
-      else
-        se.status(200).json({
-          success: true,
-          result: res
-        })
-    })
+    '$set': {
+      email: req.body.email,
+      phone: req.body.phone,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName
+    }
+  }, { new: true }, function (err, res) {
+    if (err) return next(err)
+    if (!res) {
+      return next({
+        code: 204,
+        success: true,
+        message: 'Updated'
+      })
+    } else {
+      se.status(200).json({
+        success: true,
+        result: res
+      })
+    }
+  }
   )
 })
 
@@ -140,26 +144,27 @@ routerAfterAuth.patch('/user/update', function (req, se, next) {
 routerAfterAuth.delete('/user/delete/:id', function (req, se, next) {
   isAdmin(req.user._id, (err, resp) => {
     if (err) return next(err)
-    else
+    else {
       User.findOne(
         { _id: req.params.id })
         .exec(function (err, res) {
           if (err) return next(err)
-          if (!res)
+          if (!res) {
             return next({
               code: 404,
               success: false,
-              message: "User to delete not found"
+              message: 'User to delete not found'
             })
-          else {
+          } else {
             res.remove()
             se.status(200).json({
               success: true,
               result: res,
-              message: "Deleted"
+              message: 'Deleted'
             })
           }
         })
+    }
   })
 })
 

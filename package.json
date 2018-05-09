@@ -25,7 +25,7 @@
       "version": "2.1.4"
     },
     "axios": "^0.18.0",
-    "bcrypt": "^1.0.3",
+    "bcrypt": "^2.0.1",
     "bluebird": {
       "integrity": "sha1-eRQg1/VR7qKJdFOop3ZT+WYG1nw=",
       "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-3.5.0.tgz",
