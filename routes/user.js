@@ -15,8 +15,12 @@ routerBeforeAuth.post('/auth/register', function (req, res, next) {
   newUser.hashPassword = bcrypt.hashSync(req.body.password, 10)
   newUser.createdDate = Date.now()
   newUser.save(function (err, user) {
-    if (err) return next(err)
-    else {
+    if (err) {
+      res.status(401).json({
+        success: false,
+        message: err
+      })
+    } else {
       res.status(201).json({
         success: true,
         message: 'Created'
