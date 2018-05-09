@@ -34,7 +34,7 @@ app.use(function (req, res, next) {
   if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
     jsonwebtoken.verify(req.headers.authorization.split(' ')[1], app.get('superSecret'), function (err, decode) {
       if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' })
+        return next(err)
       } else {
         req.user = decode
         next()
@@ -42,7 +42,7 @@ app.use(function (req, res, next) {
     })
   } else {
     req.user = undefined
-    return res.status(403).send({
+    return next({
       success: false,
       message: 'No token provided.'
     })
@@ -61,8 +61,11 @@ app.use((req, res) => {
 
 // basic error handler
 app.use((err, req, res, next) => {
-  console.error()
-  res.status(err.code || 500).send(err.message || 'Something broke!')
+  console.error(err)
+  res.status(err.code || 500).json({
+    success : false,
+    message: err.message || 'Something broke!'
+  })
 })
 
 // start the server

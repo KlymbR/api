@@ -16,34 +16,42 @@ Pour enregistrer un nouvel utilisateur.
 `POST localhost:3001/auth/register`
 
 #### Corps
-`{`  
-	`"id": 1,`  
-	`"password": "toto",`  
-	`"firstName": "Avel",`  
-	`"lastName": "Docquin",`  
-	`"email": "adocquin@outlook.com",`  
-	`"phone": "+33624350681",`  
-	`"gender": 1`,`  
-	"birthdate": "1994-06-28",`  
-	`"licenses": [{`  
-		`"licenseNbr": 1234,`  
-		`"clubName": "totoScalade",`  
-		`"clubId": 1,`  
-		`"fedId": 1,`  
-		`"endDate": "1994-06-28",`  
-		`"status": 1`  
-	`}],`  
-	`"address": {`  
-		`"number": 43,`  
-		`"street": "totoStreet",`  
-		`"postalCode": "78800",`  
-		`"city": "Houilles"`  
-	`},`  
-	`"isAdmin": false`  
-`}`
+```json
+{  
+	"password": "toto",  
+	"firstName": "Avel",  
+	"lastName": "Docquin",  
+	"email": "adocquin@outlook.com",  
+	"phone": "+33624350681",  
+	"gender": 1,  
+	"birthdate": "1994-06-28",  
+	"licenses": [{  
+		"licenseNbr": 1234,  
+		"clubName": "totoScalade",  
+		"clubId": 1,  
+		"fedId": 1,  
+		"endDate": "1994-06-28",  
+		"status": 1  
+	}],  
+	"address": {  
+		"number": 43,  
+		"street": "totoStreet",  
+		"postalCode": "78800",  
+		"city": "Houilles"  
+	},  
+	"isAdmin": false  
+}
+```
 
 #### Réponse
 `201 Created`
+
+```json
+{
+    "success": true,
+    "message": "Created"
+}
+```
 
 ### Connection
 Pour se connecter en tant qu'utilisateur.
@@ -52,17 +60,22 @@ Pour se connecter en tant qu'utilisateur.
 `POST api.klymbr.com/auth/sign_in/`
 
 #### Corps
-`{  
-  "email": "adocquin@outlook.com",`  
-  `"password": "toto"`  
-`}`
+```json
+{  
+  "email": "adocquin@outlook.com",
+  "password": "toto"
+}
+```
 
 #### Réponse
 `200 OK`  
 
-`{`  
-    `"token":`   `"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkb2NxdWluQG91dGxvb2suY29tIiwiX2lkIjoiNWFkNDk0MjViZWEwYWIyZGI4ZmEzYjkxIiwiaWF0IjoxNTIzODgxMTk5fQ.BXEqIIM3NtfF87sJUIi0Qpd1mwKE7Bu-9XeeEQslgGU"`  
-`}`
+```json
+{
+    "success": true,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YWYyZTBiZDYwNmQzODBiY2RkYTk3YjAiLCJlbWFpbCI6Imd1aXZlLmphbGlsaUBlcGl0ZWNoLmV1IiwiaWF0IjoxNTI1ODY2Njg5fQ.1qsBYUnXaT6e6cdkYhV0FL0g6o_wnvPxrSzs676Xwk4"
+}
+```
 
 ## Requêtes
 Ensemble des requêtes de cette api.
@@ -77,41 +90,45 @@ Ensemble des requêtes de cette api.
 Pour obtenir un utilisateur par son id.
 
 #### Requête
-`localhost:3001/user`
+`GET localhost:3001/user`
 
 #### Réponse
 `200 OK`  
 
-`{`  
-    `"address": {`  
-        `"number": 43,`  
-        `"street": "totoStreet",`  
-        `"postalCode": 78800,`  
-        `"city": "Houilles"`  
-    `},`  
-    `"licenses": [`  
-        `{`  
-            `"licenseNbr": 1234,`  
-            `"clubName": "totoScalade",`  
-            `"clubId": 1,`  
-            `"fedId": 1,`  
-            `"endDate": "1994-06-28",`  
-            `"status": 1`  
-        `}`  
-    `],`  
-    `"_id": "5ad49425bea0ab2db8fa3b91",`  
-    `"id": 1,`  
-    `"firstName": "Avel",`  
-    `"lastName": "Docquin",`  
-    `"email": "adocquin@outlook.com",`  
-    `"phone": "+33624350681",`  
-    `"gender": 1,`  
-    `"birthdate": "1994-06-28T00:00:00.000Z",`  
-    `"hashPassword":   "$2a$10$f0ku35V5rSQcWMAtKMj5Uu1J9Fa0c1h9OSY1f7VvatZ8gVNqSddhO",`  
-    `"createdDate": "2018-04-16T12:16:37.847Z",`  
-		`"isAdmin": false`  
-    `"__v": 0`  
-`}`
+```json
+{
+    "success": true,
+    "result": {
+        "address": {
+            "number": 43,
+            "street": "totoStreet",
+            "postalCode": 78800,
+            "city": "Houilles"
+        },
+        "licenses": [
+            {
+                "licenseNbr": 1234,
+                "clubName": "totoScalade",
+                "clubId": 1,
+                "fedId": 1,
+                "endDate": "1994-06-28",
+                "status": 1
+            }
+        ],
+        "_id": "5af2e2a543a8cb0c35af08b7",
+        "firstName": "Avel",
+        "lastName": "Docquin",
+        "email": "adocquin@outlook.com",
+        "phone": "+33624350681",
+        "gender": 1,
+        "birthdate": "1994-06-28T00:00:00.000Z",
+        "isAdmin": false,
+        "hashPassword": "$2a$10$JOF9OZtPP3mBy9MmrljoMeuZq8GIj8/gqey2aIM4A7P.nI1Bqe2ne",
+        "createdDate": "2018-05-09T11:59:33.272Z",
+        "__v": 0
+    }
+}
+```
 
 ### Obtenir les utilisateurs avec une license particulière
 Pour obtenir la liste des utilisateurs ayant une license particulière.  
@@ -124,36 +141,42 @@ Cette commande est réservée aux administrateurs.
 #### Réponse
 `200 OK`  
 
-`{`  
-    `"address": {`  
-        `"number": 43,`  
-        `"street": "totoStreet",`  
-        `"postalCode": 78800,`  
-        `"city": "Houilles"`  
-    `},`  
-    `"licenses": [`  
-        `{`  
-            `"licenseNbr": 1234,`  
-            `"clubName": "totoScalade",`  
-            `"clubId": 1,`  
-            `"fedId": 1,`  
-            `"endDate": "1994-06-28",`  
-            `"status": 1`  
-        `}`  
-    `],`  
-    `"_id": "5ad49425bea0ab2db8fa3b91",`  
-    `"id": 1,`  
-    `"firstName": "Avel",`  
-    `"lastName": "Docquin",`  
-    `"email": "adocquin@outlook.com",`  
-    `"phone": "+33624350681",`  
-    `"gender": 1,`  
-    `"birthdate": "1994-06-28T00:00:00.000Z",`  
-    `"hashPassword":   "$2a$10$f0ku35V5rSQcWMAtKMj5Uu1J9Fa0c1h9OSY1f7VvatZ8gVNqSddhO",`  
-    `"createdDate": "2018-04-16T12:16:37.847Z",`  
-		`"isAdmin": false`  
-    `"__v": 0`  
-`}`
+```json
+{
+    "success": true,
+    "result": [
+        {
+            "address": {
+                "number": 43,
+                "street": "totoStreet",
+                "postalCode": 78800,
+                "city": "Houilles"
+            },
+            "licenses": [
+                {
+                    "licenseNbr": 1234,
+                    "clubName": "totoScalade",
+                    "clubId": 1,
+                    "fedId": 1,
+                    "endDate": "1994-06-28",
+                    "status": 1
+                }
+            ],
+            "_id": "5af2e3a243a8cb0c35af08b8",
+            "firstName": "Avel",
+            "lastName": "Docquin",
+            "email": "adocquin@outlook.com",
+            "phone": "+33624350681",
+            "gender": 1,
+            "birthdate": "1994-06-28T00:00:00.000Z",
+            "isAdmin": true,
+            "hashPassword": "$2a$10$OBd5cb2ro8LSS.SZepTbXe35hSM7hF2FbmHUyZG225xyC2lSMYh0m",
+            "createdDate": "2018-05-09T12:03:46.306Z",
+            "__v": 0
+        }
+    ]
+}
+```
 + les autres utilisateurs avec ce format
 
 ### Modifier les infos d'un utilisateur
@@ -163,31 +186,97 @@ Pour modifier les informations d'un utilisateur: téléphone, email, prénom, no
 `PATCH localhost:3001/user/update`
 
 #### Corps
-`{`  
-	`"id":1,`  
-	`"email":"test@mail.com",`   
-	`"phone":"+33611223344"`  
-	`"firstName":"Avel"`  
-	`"lastName":"Docquin"`  
-`}`
-
+```json
+{  
+	"email":"test@mail.com",   
+	"phone":"+33611223344",  
+	"firstName":"Avel",
+	"lastName":"Docquin"  
+}
+```
 #### Réponse
 `200 OK`
+
+```json
+{
+    "success": true,
+    "result": {
+        "address": {
+            "number": 43,
+            "street": "totoStreet",
+            "postalCode": 78800,
+            "city": "Houilles"
+        },
+        "licenses": [
+            {
+                "licenseNbr": 1234,
+                "clubName": "totoScalade",
+                "clubId": 1,
+                "fedId": 1,
+                "endDate": "1994-06-28",
+                "status": 1
+            }
+        ],
+        "_id": "5af2e3a243a8cb0c35af08b8",
+        "firstName": "Avel",
+        "lastName": "Docquin",
+        "email": "test@mail.com",
+        "phone": "+33611223344",
+        "gender": 1,
+        "birthdate": "1994-06-28T00:00:00.000Z",
+        "isAdmin": true,
+        "hashPassword": "$2a$10$OBd5cb2ro8LSS.SZepTbXe35hSM7hF2FbmHUyZG225xyC2lSMYh0m",
+        "createdDate": "2018-05-09T12:03:46.306Z",
+        "__v": 0
+    }
+}
+```
 
 ### Supprimer un utilisateur
 Pour supprimer un utilisateur.  
 Cette commande est réservée aux administrateurs.
 
 ### Requête
-`DELETE localhost:3001/user/delete`
-
-### Corps
-`{`  
-	`"id":1,`  
-`}`
+`DELETE localhost:3001/user/delete/:id`
 
 #### Réponse
 `200 OK`
+
+``` json
+{
+    "success": true,
+    "result": {
+        "address": {
+            "number": 43,
+            "street": "totoStreet",
+            "postalCode": 78800,
+            "city": "Houilles"
+        },
+        "licenses": [
+            {
+                "licenseNbr": 1234,
+                "clubName": "totoScalade",
+                "clubId": 1,
+                "fedId": 1,
+                "endDate": "1994-06-28",
+                "status": 1
+            }
+        ],
+        "_id": "5af2e3a243a8cb0c35af08b8",
+        "firstName": "Avel",
+        "lastName": "Docquin",
+        "email": "test@mail.com",
+        "phone": "+33611223344",
+        "gender": 1,
+        "birthdate": "1994-06-28T00:00:00.000Z",
+        "isAdmin": true,
+        "hashPassword": "$2a$10$OBd5cb2ro8LSS.SZepTbXe35hSM7hF2FbmHUyZG225xyC2lSMYh0m",
+        "createdDate": "2018-05-09T12:03:46.306Z",
+        "__v": 0
+    },
+    "message": "Deleted"
+}
+```
 
 ### Obtenir les voies
 Pour obtenir les informations des voies.
@@ -198,26 +287,28 @@ Pour obtenir les informations des voies.
 #### Réponse
 `200 OK`  
 
-`[`  
-    `{`  
-        `"grips": [`  
-            `{`  
-                `"grip_id": 1,`  
-                `"grip_data": 234,`  
-                `"grip_on": true`  
-            `},`  
-            `{`  
-                `"grip_id": 2,`  
-                `"grip_data": 234,`  
-                `"grip_on": true`  
-            `}`  
-        `],`  
-        `"_id": "5ab4043135dc0d45e17f2836",`  
-        `"path_id": 1,`  
-        `"path_free": false,`  
-        `"path_difficulty": "6A"`  
-    `}`  
-`]`
+```json
+[  
+    {  
+        "grips": [  
+            {  
+                "grip_id": 1,  
+                "grip_data": 234,  
+                "grip_on": true  
+            },  
+            {  
+                "grip_id": 2,  
+                "grip_data": 234,  
+                "grip_on": true  
+            }  
+        ],  
+        "_id": "5ab4043135dc0d45e17f2836",  
+        "path_id": 1,  
+        "path_free": false,  
+        "path_difficulty": "6A"  
+    }  
+]
+```
 
 ### Obtenir une voie
 Pour obtenir les informations d'une voie avec son id
@@ -228,26 +319,28 @@ Pour obtenir les informations d'une voie avec son id
 #### Réponse
 `200 OK`  
 
-`[`  
-    `{`  
-        `"grips": [`  
-            `{`  
-                `"grip_id": 1,`  
-                `"grip_data": 234,`  
-                `"grip_on": true`  
-            `},`  
-            `{`  
-                `"grip_id": 2,`  
-                `"grip_data": 234,`  
-                `"grip_on": true`  
-            `}`  
-        `],`  
-        `"_id": "5ab4043135dc0d45e17f2836",`  
-        `"path_id": 1,`  
-        `"path_free": false,`  
-        `"path_difficulty": "6A"`  
-    `}`  
-`]`
+```json
+[  
+    {  
+        "grips": [  
+            {  
+                "grip_id": 1,  
+                "grip_data": 234,  
+                "grip_on": true  
+            },  
+            {  
+                "grip_id": 2,  
+                "grip_data": 234,  
+                "grip_on": true  
+            }  
+        ],  
+        "_id": "5ab4043135dc0d45e17f2836",  
+        "path_id": 1,  
+        "path_free": false,  
+        "path_difficulty": "6A"  
+    }  
+]
+```
 
 ### Occuper / Libérer une voie
 Pour modifier l'état libre d'une voie.
@@ -256,10 +349,12 @@ Pour modifier l'état libre d'une voie.
 `POST localhost:3001/path/free`
 
 #### Corps
-`{`  
-	`"path_id": 1,`  
-	`"path_free": false`  
-`}`
+```json
+{  
+	"path_id": 1,  
+	"path_free": false  
+}
+```
 
 #### Réponse
 `200 OK`
@@ -272,11 +367,13 @@ Cette commande est réservée aux administrateurs.
 `POST localhost:3001/climbingRoom/add`
 
 #### Corps
-`{`  
-	`"title":"totoScalade",`  
-	`"latitude":437,`  
-	`"longitude":183`  
-`}`
+```json
+{  
+	"title":"totoScalade",  
+	"latitude":437,  
+	"longitude":183  
+}
+```
 
 #### Réponse
 `201 Created`
@@ -289,14 +386,15 @@ Pour obtenir une salle d'escalade avec son title.
 
 #### Réponse
 `200 OK`
-
-`{`  
-	`"_id": "5ae9bacba0617f3a64b1c67f",`  
-	`"title":"totoScalade",`  
-	`"latitude":437,`  
-	`"longitude":183,`  
-	`"__v": 0`  
-`}`
+```json
+{  
+	"_id": "5ae9bacba0617f3a64b1c67f",  
+	"title":"totoScalade",  
+	"latitude":437,  
+	"longitude":183,  
+	"__v": 0  
+}
+```
 
 ### Supprimer une salle d'escalade
 Pour supprimer une salle d'escalade avec son title.  

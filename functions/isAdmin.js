@@ -3,18 +3,18 @@
 var User = require('../models/user')
 
 // check if a user is an admin
-function isAdmin (mail) {
+function isAdmin(id, cb) {
   User.findOne({
-    email: mail
+    _id: id
   }, function (err, user) {
-    if (err) {
-      console.log(err)
-      return false
-    }
-    if (!user) {
-      return false
+    if (err) return cb(err)
+    if (user && user.isAdmin) {
+      return cb(null, true)
     } else {
-      return true
+      return cb({
+        code: 401,
+        message: "Unauthorized, is not admin"
+      })
     }
   })
 }

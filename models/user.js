@@ -4,12 +4,6 @@ var mongoose = require('mongoose')
 var bcrypt = require('bcrypt')
 
 var userSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    unique: true,
-    required: true,
-    trim: true
-  },
   hashPassword: {
     type: String,
     unique: false,
