@@ -29,7 +29,7 @@ app.use(bodyParser.json())
 app.use(morgan('dev'))
 
 // Add headers
-router.use(function (req, res, next) {
+app.use(function (req, res, next) {
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -38,7 +38,7 @@ router.use(function (req, res, next) {
   next();
 });
 
-router.options("/*", function (req, res) {
+app.options("/*", function (req, res) {
 
   // Request methods you wish to allow
 
