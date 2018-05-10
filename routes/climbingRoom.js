@@ -24,7 +24,7 @@ router.post('/climbingRoom/add', function (req, se) {
 })
 
 // get a climbing room with its title
-router.get('/climbingRoom', function (req, se) {
+router.get('/climbingRoom', function (req, se, next) {
   ClimbingRoom.findOne({
     title: req.query.title
   }, function (err, user) {
@@ -34,7 +34,11 @@ router.get('/climbingRoom', function (req, se) {
       return err
     }
     if (!user) {
-      se.sendStatus(204)
+      return next({
+        code: 404,
+        success: false,
+        message: 'No climbing room with this title found'
+      })
     } else {
       se.send(user)
     }

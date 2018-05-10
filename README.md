@@ -130,6 +130,52 @@ Pour obtenir un utilisateur par son id.
 }
 ```
 
+### Obtenir tous les utilisateurs
+Pour obtenir tous les utilisateurs.  
+Cette commande est réservée aux administrateurs.
+
+#### Requête
+`GET localhost:3001/user/all`
+
+#### Réponse
+`200 OK`  
+
+```json
+{
+    "success": true,
+    "result": {
+        "address": {
+            "number": 43,
+            "street": "totoStreet",
+            "postalCode": 78800,
+            "city": "Houilles"
+        },
+        "licenses": [
+            {
+                "licenseNbr": 1234,
+                "clubName": "totoScalade",
+                "clubId": 1,
+                "fedId": 1,
+                "endDate": "1994-06-28",
+                "status": 1
+            }
+        ],
+        "_id": "5af2e2a543a8cb0c35af08b7",
+        "firstName": "Avel",
+        "lastName": "Docquin",
+        "email": "adocquin@outlook.com",
+        "phone": "+33624350681",
+        "gender": 1,
+        "birthdate": "1994-06-28T00:00:00.000Z",
+        "isAdmin": false,
+        "hashPassword": "$2a$10$JOF9OZtPP3mBy9MmrljoMeuZq8GIj8/gqey2aIM4A7P.nI1Bqe2ne",
+        "createdDate": "2018-05-09T11:59:33.272Z",
+        "__v": 0
+    }  
+		[...]  
+}
+```
+
 ### Obtenir les utilisateurs avec une license particulière
 Pour obtenir la liste des utilisateurs ayant une license particulière.  
 Se réfère aux clubId des licences.  
@@ -405,3 +451,206 @@ Cette commande est réservée aux administrateurs.
 
 #### Réponse
 `200 OK`
+
+### Ajouter une voie
+Pour ajouter une voie.
+
+#### Requête
+`POST localhost:3001/path/add`
+
+#### Corps
+```json
+{  
+  "path_id":2,  
+  "path_free": true,  
+  "path_difficulty": "B2",  
+  "grips": [{  
+  	"grip_id":1,  
+  	"grip_data":120,  
+  	"grip_on":false  
+  }, {  
+  	"grip_id":2,  
+  	"grip_data":143,  
+  	"grip_on":true  
+  }]  
+}
+```
+
+#### Réponse
+`200 OK`
+```json
+{  
+    "success": true,  
+    "result": "OK"  
+}
+```
+
+### Ajouter une prise
+Pour ajouter une prise à une voie.
+
+#### Requête
+`POST localhost:3001/grip/add`
+
+#### Corps
+```json
+{  
+	"path_id":1,  
+	"grip_id":3,  
+	"grip_data":123,  
+	"grip_on":true  
+}
+```
+
+#### Réponse
+`200 OK`
+```json
+{  
+    "success": true,  
+    "result": "OK"  
+}
+```
+
+### Obtenir les statistiques
+Pour obtenir les statistiques des voies.
+
+#### Requête
+`GET localhost:3001/stat`
+
+#### Réponse
+`200 OK`  
+
+```json
+[  
+    {  
+        "_id": "5af353eec1fcd600c8bcdfc2",  
+        "path_id": 1,  
+        "path_difficulty": "6A",  
+        "average_time": 76,  
+        "best_time": 53,  
+        "best_firstName": "Sofiane",  
+        "best_lastName": "Zermani",  
+        "__v": 0  
+    }  
+]
+```
+
+### Obtenir une statistique
+Pour obtenir les statistiques d'une voie.
+
+#### Requête
+`GET localhost:3001/stat?path_id=1`
+
+#### Réponse
+`200 OK`  
+
+```json
+[  
+    {  
+        "_id": "5af353eec1fcd600c8bcdfc2",  
+        "path_id": 1,  
+        "path_difficulty": "6A",  
+        "average_time": 76,  
+        "best_time": 53,  
+        "best_firstName": "Sofiane",  
+        "best_lastName": "Zermani",  
+        "__v": 0  
+    }  
+]
+```
+
+### Ajouter une statistique
+Pour ajouter une statistique d'une voie.  
+Cette commande est réservée aux administrateurs.
+
+#### Requête
+`POST localhost:3001/stat/add`
+
+#### Corps
+```json
+{  
+	"path_id":1,  
+	"path_difficulty":"6A",  
+	"average_time":76,  
+	"best_time":53,  
+	"best_firstName":"Sofiane",  
+	"best_lastName":"Zermani"  
+}
+```
+
+#### Réponse
+`200 OK`
+```json
+{  
+    "success": true,  
+    "message": "Created"  
+}
+```
+
+### Modifier une statistique
+Pour modifier une statistique d'une voie.
+
+#### Requête
+`PATCH localhost:3001/stat/update`
+
+#### Corps
+```json
+{  
+	"path_id":1,  
+	"path_difficulty":"6A",  
+	"average_time":75,  
+	"best_time":49,  
+	"best_firstName":"Lamine",  
+	"best_lastName":"Diakité"  
+}
+```
+
+#### Réponse
+`200 OK`
+```json
+{  
+    "success": true,  
+    "result": {  
+        "_id": "5af36904b876cf49980cf438",  
+        "path_id": 1,  
+        "path_difficulty": "6A",  
+        "average_time": 75,  
+        "best_time": 49,  
+        "best_firstName": "Lamine",  
+        "best_lastName": "Diakité",  
+        "__v": 0  
+    }
+}
+```
+
+### Supprimer une statistique
+Pour supprimer une statistique d'une voie.  
+Cette commande est réservée aux administrateurs.
+
+#### Requête
+`DELETE localhost:3001/stat/delete`
+
+#### Corps
+```json
+{  
+	"path_id":1,  
+}
+```
+
+#### Réponse
+`200 OK`
+```json
+{  
+    "success": true,  
+    "result": {  
+        "_id": "5af3597312056734145f1166",  
+        "path_id": 1,  
+        "path_difficulty": "6A",  
+        "average_time": 76,  
+        "best_time": 53,  
+        "best_firstName": "Sofiane",  
+        "best_lastName": "Zermani",  
+        "__v": 0  
+    },  
+    "message": "Deleted"  
+}
+```
