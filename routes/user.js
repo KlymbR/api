@@ -143,31 +143,46 @@ routerAfterAuth.get('/user/license', function (req, se, next) {
 
 // update user information
 routerAfterAuth.patch('/user/update', function (req, se, next) {
-  User.findOneAndUpdate({
-    _id: req.user._id
-  }, {
-    '$set': {
-      email: req.body.email,
-      phone: req.body.phone,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName
-    }
-  }, { new: true }, function (err, res) {
+  let param = {}
+  for (var item in req.body) {
+    if (item === "address")
+      ;
+    if (item === "email" || item === "phone" ||
+      item === "firstName" || item === "lastName")
+      param[item] = req.body[item]
+  }
+
+  User.findOne({
+    '_id': req.user._id
+  }, (err, user) => {
     if (err) return next(err)
-    if (!res) {
+    else if (!user) {
       return next({
-        code: 204,
-        success: true,
-        message: 'Updated'
+        code: 404,
+        success: false,
+        message: 'User not found'
       })
     } else {
-      se.status(200).json({
-        success: true,
-        result: res
+      if (req.body.address)
+        req.body.address = Object.assign(user.address, req.body.address)
+      var UpdatedUser = new User(Object.assign(user, req.body))
+      UpdatedUser.save((err, resp) => {
+        if (err) return next(err)
+        else if (!resp) {
+          return next({
+            code: 404,
+            success: false,
+            message: 'User not updated'
+          })
+        } else {
+          se.status(200).json({
+            success: true,
+            result: resp
+          })
+        }
       })
     }
-  }
-  )
+  })
 })
 
 // Admin only
