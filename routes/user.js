@@ -49,7 +49,11 @@ routerBeforeAuth.post('/auth/sign_in', function (req, res, next) {
           message: 'Authentication failed. Wrong password.'
         })
       } else {
-        const token = jwt.sign({ _id: user._id, email: user.email, fullName: user.fullName }, config.secret)
+        const token = jwt.sign({
+          _id: user._id,
+          email: user.email,
+          fullName: user.fullName
+        }, config.secret)
         res.cookie('token', token)
         res.set('Authorization', token)
         return res.status(200).json({
@@ -143,15 +147,6 @@ routerAfterAuth.get('/user/license', function (req, se, next) {
 
 // update user information
 routerAfterAuth.patch('/user/update', function (req, se, next) {
-  let param = {}
-  for (var item in req.body) {
-    if (item === "address")
-      ;
-    if (item === "email" || item === "phone" ||
-      item === "firstName" || item === "lastName")
-      param[item] = req.body[item]
-  }
-
   User.findOne({
     '_id': req.user._id
   }, (err, user) => {
@@ -191,8 +186,9 @@ routerAfterAuth.delete('/user/delete/:id', function (req, se, next) {
   isAdmin(req.user._id, (err, resp) => {
     if (err) return next(err)
     else {
-      User.findOne(
-        { _id: req.params.id })
+      User.findOne({
+          _id: req.params.id
+        })
         .exec(function (err, res) {
           if (err) return next(err)
           if (!res) {
