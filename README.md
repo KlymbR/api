@@ -237,7 +237,13 @@ Pour modifier les informations d'un utilisateur: téléphone, email, prénom, no
 	"email":"test@mail.com",   
 	"phone":"+33611223344",  
 	"firstName":"Avel",
-	"lastName":"Docquin"  
+    "lastName":"Docquin",
+    "address": {
+                "number": 43,
+                "street": "totoStreet",
+                "postalCode": 78800,
+                "city": "Houilles"
+            }
 }
 ```
 #### Réponse

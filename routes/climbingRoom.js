@@ -71,23 +71,4 @@ router.delete('/climbingRoom/delete/:title', function (req, se) {
   })
 })
 
-// add a new climbing room
-router.post('/climbingRoom/add', function (req, se) {
-  isAdmin(req.user._id, (err, resp) => {
-    if (err) return next(err)
-    else {
-      var newClimbingRoom = new ClimbingRoom(req.body)
-      newClimbingRoom.save(function (err, user) {
-        if (err) {
-          return se.status(400).send({
-            message: err
-          })
-        } else {
-          se.sendStatus(201)
-        }
-      })
-    }
-  })
-})
-
 module.exports = router
