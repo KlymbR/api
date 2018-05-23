@@ -42,7 +42,10 @@ router.get('/climbingRoom', function (req, se, next) {
         message: 'No climbing room with this title found'
       })
     } else {
-      se.send(user)
+      se.status(200).json({
+        success: "true",
+        result: user
+      })
     }
   })
 })

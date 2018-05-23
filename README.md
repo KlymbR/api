@@ -448,6 +448,30 @@ Pour obtenir une salle d'escalade avec son title.
 }
 ```
 
+### Obtenir toutes les salle d'escalade
+Pour obtenir toutes les salle d'escalade.
+
+#### Requête
+`GET localhost:3001/climbingRoom
+
+#### Réponse
+`200 OK`
+```json
+{
+    "success": true,
+    "result":
+    [  
+        {
+            "_id": "5ae9bacba0617f3a64b1c67f",  
+	        "title":"totoScalade",  
+	        "latitude":437,  
+	        "longitude":183,  
+            "__v": 0
+        }
+    ]  
+}
+```
+
 ### Supprimer une salle d'escalade
 Pour supprimer une salle d'escalade avec son title.  
 Cette commande est réservée aux administrateurs.
