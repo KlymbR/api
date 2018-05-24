@@ -6,18 +6,35 @@ var ClimbingRoom = require('../models/climbingRoom')
 var isAdmin = require('../functions/isAdmin.js')
 
 // add a new climbing room
-router.post('/climbingRoom/add', function (req, se) {
+router.post('/climbingRoom/add', function (req, se, next) {
   isAdmin(req.user._id, (err, resp) => {
     if (err) return next(err)
     else {
-      var newClimbingRoom = new ClimbingRoom(req.body)
-      newClimbingRoom.save(function (err, user) {
+      ClimbingRoom.findOne({ title: req.query.title }, function (err, user) {
         if (err) {
-          return se.status(400).send({
+          res.status(401).json({
+            success: false,
             message: err
           })
+        }
+        if (!user) {
+          var newClimbingRoom = new ClimbingRoom(req.body)
+          newClimbingRoom.save(function (err, user) {
+            if (err) {
+              return next(err)
+            } else {
+              se.status(201).json({
+                success: true,
+                message: 'Created'
+              })
+            }
+          })
         } else {
-          se.sendStatus(201)
+          return next({
+            code: 400,
+            success: false,
+            message: 'This climbing room already exist'
+          })
         }
       })
     }
@@ -29,22 +46,18 @@ router.get('/climbingRoom', function (req, se, next) {
   let param = {}
   if (req.query.title)
     param.title = req.query.title
-  ClimbingRoom.findOne(param , function (err, user) {
-    if (err) {
-      console.log(err)
-      se.status(500).send(err)
-      return err
-    }
+  ClimbingRoom.find(param, function (err, user) {
+    if (err) return next(err)
     if (!user) {
       return next({
         code: 404,
         success: false,
-        message: 'No climbing room with this title found'
+        message: Object.keys(param).length > 1 ? 'No climbing room with this title found' : "Not Found"
       })
     } else {
       se.status(200).json({
         success: "true",
-        result: user
+        result: Object.keys(param).length > 1 ? user : user[0]
       })
     }
   })
@@ -58,18 +71,20 @@ router.delete('/climbingRoom/delete/:title', function (req, se) {
       ClimbingRoom.findOne(
         { title: req.params.title })
         .exec(function (err, res) {
-          if (err) {
-            console.log(err)
-            return se.status(500).send(err)
-          }
+          if (err) return next(err)
           if (!res) {
-            se.sendStatus(204)
+            return next({
+              code: 204,
+              success: false
+            })
           } else {
             res.remove()
-            se.sendStatus(200)
+            se.status(200).json({
+              success: "true",
+              result: "Deleted"
+            })
           }
         })
-
     }
   })
 })

@@ -452,7 +452,7 @@ Pour obtenir une salle d'escalade avec son title.
 Pour obtenir toutes les salle d'escalade.
 
 #### Requête
-`GET localhost:3001/climbingRoom
+`GET localhost:3001/climbingRoom`
 
 #### Réponse
 `200 OK`
