@@ -158,8 +158,9 @@ routerAfterAuth.patch('/user/update', function (req, se, next) {
         message: 'User not found'
       })
     } else {
-      if (req.body.address)
+      if (req.body.address) {
         req.body.address = Object.assign(user.address, req.body.address)
+      }
       var UpdatedUser = new User(Object.assign(user, req.body))
       UpdatedUser.save((err, resp) => {
         if (err) return next(err)
@@ -187,8 +188,8 @@ routerAfterAuth.delete('/user/delete/:id', function (req, se, next) {
     if (err) return next(err)
     else {
       User.findOne({
-          _id: req.params.id
-        })
+        _id: req.params.id
+      })
         .exec(function (err, res) {
           if (err) return next(err)
           if (!res) {
