@@ -4,6 +4,7 @@ var express = require('express')
 var router = express.Router()
 const axios = require('axios')
 const CircularJSON = require('circular-json')
+var isAdmin = require('../functions/isAdmin.js')
 
 // configuration of axios
 const holdsUrl = 'http://localhost'
@@ -77,64 +78,143 @@ router.post('/path/free', function (req, se, next) {
     })
 })
 
+// Admin only
 // add a new path
 router.post('/path/add', function (req, se, next) {
-  if (req.body.path_id === undefined || req.body.path_free === undefined ||
-    req.body.path_difficulty === undefined) {
-    return next({
-      code: 400,
-      success: false,
-      message: 'One element is missing'
-    })
-  }
-  let request = url + '/path/add'
-  axios.post(request, {
-    path_id: req.body.path_id,
-    path_free: req.body.path_free,
-    path_difficulty: req.body.path_difficulty,
-    grips: req.body.grips
-  })
-    .then(function (res) {
-      let json = CircularJSON.stringify(res)
-      let data = CircularJSON.parse(json).data
-      se.status(200).json({
-        success: true,
-        result: data
+  isAdmin(req.user._id, (err, resp) => {
+    if (err) return next(err)
+    else {
+      if (req.body.path_id === undefined || req.body.path_free === undefined ||
+        req.body.path_difficulty === undefined) {
+        return next({
+          code: 400,
+          success: false,
+          message: 'One element is missing'
+        })
+      }
+      let request = url + '/path/add'
+      axios.post(request, {
+        path_id: req.body.path_id,
+        path_free: req.body.path_free,
+        path_difficulty: req.body.path_difficulty,
+        grips: req.body.grips
       })
-    })
-    .catch(function (err) {
-      return next(err)
-    })
+        .then(function (res) {
+          let json = CircularJSON.stringify(res)
+          let data = CircularJSON.parse(json).data
+          se.status(200).json({
+            success: true,
+            result: data
+          })
+        })
+        .catch(function (err) {
+          return next(err)
+        })
+    }
+  })
 })
 
+// Admin only
+// delete a path with its id
+router.post('/path/delete', function (req, se, next) {
+  isAdmin(req.user._id, (err, resp) => {
+    if (err) return next(err)
+    else {
+      if (req.body.path_id === undefined) {
+        return next({
+          code: 400,
+          success: false,
+          message: 'body path_id missing'
+        })
+      }
+      let request = url + '/path/delete'
+      axios.post(request, {
+        path_id: req.body.path_id
+      })
+        .then(function (res) {
+          let json = CircularJSON.stringify(res)
+          let data = CircularJSON.parse(json).data
+          se.status(200).json({
+            success: true,
+            result: data
+          })
+        })
+        .catch(function (err) {
+          return next(err)
+        })
+    }
+  })
+})
+
+// Admin only
+// delete a grip inside a path
+router.post('/grip/delete', function (req, se, next) {
+  isAdmin(req.user._id, (err, resp) => {
+    if (err) return next(err)
+    else {
+      if (req.body.path_id === undefined) {
+        return next({
+          code: 400,
+          success: false,
+          message: 'body path_id or grip_id missing'
+        })
+      }
+      let request = url + '/grip/delete'
+      axios.post(request, {
+        path_id: req.body.path_id,
+        grip_id: req.body.grip_id
+      })
+        .then(function (res) {
+          let json = CircularJSON.stringify(res)
+          let data = CircularJSON.parse(json).data
+          se.status(200).json({
+            success: true,
+            result: data,
+            message: 'Deleted'
+          })
+        })
+        .catch(function (err) {
+          return next(err)
+        })
+    }
+  })
+})
+
+// Admin only
 // add a new grip to a path
 router.post('/grip/add', function (req, se, next) {
-  if (req.body.path_id === undefined || req.body.grip_id === undefined ||
-    req.body.grip_data === undefined || req.body.grip_on === undefined) {
-    return next({
-      code: 400,
-      success: false,
-      message: 'One element is missing'
-    })
-  }
-  let request = url + '/grip/add'
-  axios.post(request, {
-    path_id: req.body.path_id,
-    grip_id: req.body.grip_id,
-    grip_data: req.body.grip_data,
-    grip_on: req.body.grip_on
-  })
-    .then(function (res) {
-      let json = CircularJSON.stringify(res)
-      let data = CircularJSON.parse(json).data
-      se.status(200).json({
-        success: true,
-        result: data
+  isAdmin(req.user._id, (err, resp) => {
+    if (err) return next(err)
+    else {
+      if (req.body.path_id === undefined || req.body.grip_id === undefined ||
+          req.body.grip_data === undefined || req.body.grip_on === undefined) {
+        return next({
+          code: 400,
+          success: false,
+          message: 'One element is missing'
+        })
+      }
+      let request = url + '/grip/add'
+      axios.post(request, {
+        path_id: req.body.path_id,
+        grip_id: req.body.grip_id,
+        grip_data: req.body.grip_data,
+        grip_on: req.body.grip_on
       })
-    })
-    .catch(function (err) {
-      return next(err)
-    })
+        .then(function (res) {
+          let json = CircularJSON.stringify(res)
+          let data = CircularJSON.parse(json).data
+          se.status(200).json({
+            success: true,
+            result: data,
+            message: 'Deleted'
+          })
+        })
+        .catch(function (err) {
+          return next(err)
+        })
+    }
+  })
 })
 
 module.exports = router

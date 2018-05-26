@@ -483,7 +483,8 @@ Cette commande est réservée aux administrateurs.
 `200 OK`
 
 ### Ajouter une voie
-Pour ajouter une voie.
+Pour ajouter une voie.  
+Cette commande est réservée aux administrateurs.
 
 #### Requête
 `POST localhost:3001/path/add`
@@ -515,8 +516,33 @@ Pour ajouter une voie.
 }
 ```
 
+### Supprimer une voie
+Pour supprimer une voie.  
+Cette commande est réservée aux administrateurs.
+
+#### Requête
+`POST localhost:3001/path/delete`
+
+#### Corps
+```json
+{  
+  "path_id":2
+}
+```
+
+#### Réponse
+`200 OK`
+```json
+{  
+    "success": true,  
+    "result": "OK",
+		"message": "Deleted"  
+}
+```
+
 ### Ajouter une prise
-Pour ajouter une prise à une voie.
+Pour ajouter une prise à une voie.  
+Cette commande est réservée aux administrateurs.
 
 #### Requête
 `POST localhost:3001/grip/add`
@@ -537,6 +563,31 @@ Pour ajouter une prise à une voie.
 {  
     "success": true,  
     "result": "OK"  
+}
+```
+
+### Supprimer une prise
+Pour supprimer une prise dans une voie.  
+Cette commande est réservée aux administrateurs.
+
+#### Requête
+`POST localhost:3001/grip/delete`
+
+#### Corps
+```json
+{  
+  "path_id":2,
+	"grip_id":1
+}
+```
+
+#### Réponse
+`200 OK`
+```json
+{  
+    "success": true,  
+    "result": "OK",
+		"message": "Deleted"  
 }
 ```
 
