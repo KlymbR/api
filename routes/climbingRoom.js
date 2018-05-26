@@ -58,7 +58,7 @@ router.get('/climbingRoom', function (req, se, next) {
     } else {
       console.log(user.length)
       if (user.length < 1) {
-        se.status(200).json({
+        se.status(204).json({
           success: 'false',
           message: Object.keys(param).length > 1 ? 'No climbing room' : 'Not Found'
         })
