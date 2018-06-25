@@ -1,0 +1,40 @@
+{
+  "name": "api.klymbr.com",
+  "version": "2.0.0",
+  "description": "Klymbr application programming interface",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "ts-node",
+    "start": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KlymbR/api.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "benjamin.mechard ; zackary.beaugelin ; avel.docquin ; guive.jalili",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KlymbR/api/issues"
+  },
+  "homepage": "https://github.com/KlymbR/api#readme",
+  "devDependencies": {
+    "@types/node": "^10.3.5",
+    "nodemon": "^1.17.5",
+    "ts-node": "^7.0.0",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "compression": "^1.7.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "inversify": "^4.13.0",
+    "process": "^0.11.10",
+    "recluster": "^0.4.5",
+    "reflect-metadata": "^0.1.12",
+    "winston": "^3.0.0"
+  }
+}
