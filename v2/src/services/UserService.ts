@@ -16,18 +16,28 @@ export class UserService implements IUserService {
     private userRepository: UserRepository;
 
     public async getUsers(): Promise<Array<IUser>> {
-        return await this.userRepository.findAll();
+        const users = await this.userRepository.findAll();
+        return users.map((u) => {
+            u.password = undefined;
+            return u;
+        });
     }
 
     public async createUser(user: IUser): Promise<IUser> {
-        return await this.userRepository.create(user);
+        const u = await this.userRepository.create(user);
+        u.password = undefined;
+        return u;
     }
 
     public async updateUser(user: IUser): Promise<IUser> {
-        return await this.userRepository.update(user);
+        const u = await this.userRepository.update(user);
+        u.password = undefined;
+        return u;
     }
 
     public async getUser(id: string): Promise<IUser> {
-        return await this.userRepository.find(id);
+        const user = await this.userRepository.find(id);
+        user.password = undefined;
+        return user;
     }
 }

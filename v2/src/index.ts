@@ -8,6 +8,7 @@ import container from './inversify.config';
 import { logger } from './utils/Logger';
 import { IRegistrableController } from './controllers/IRegistrableController';
 import { join } from 'path';
+import { SwaggerUIBundle, SwaggerUIStandalonePreset } from "swagger-ui-dist";
 
 class Server {
     private app: express.Application;
@@ -25,11 +26,9 @@ class Server {
         this.controllers = container.getAll<IRegistrableController>(TYPES.Controller);
         this.controllers.forEach(controller => controller.register(this.app));
 
-        /*
-        ** this.app.get('*', async (req: express.Request, res: express.Response) => {
-        **     res.sendFile(join(__dirname, ''));
-        ** });
-        */
+        this.app.get('/swagger.json', async (req: express.Request, res: express.Response) => {
+            res.sendFile(join(__dirname, 'swagger.json'));
+        });
     }
 
     public listen(port: number) {
@@ -39,12 +38,15 @@ class Server {
     }
 
     private use() {
-        this.app.use(compression())
+        const swaggerUiAssetPath = require("swagger-ui-dist").getAbsoluteFSPath();
+        this.app.use(express.static(swaggerUiAssetPath));
+        console.log(join(__dirname, 'swagger.json'));
+        // this.app.use(express.static(join(__dirname, '')));
+        this.app.use(compression());
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(bodyParser.json({ limit: '20mb' }));
         this.app.use(cookieParser());
         this.app.use(cors());
-        // this.app.use(express.static(join(__dirname, '')));
         this.app.use((err: Error, req: express.Request,
             res: express.Response, next: express.NextFunction) => {
             console.log(err);

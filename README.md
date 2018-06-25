@@ -4,7 +4,40 @@
 Pour accéder aux fonctionnalités à implémenter: [Liste des fonctionnalités](TODO.md)
 
 ## Configuration
-Pour changer l'adresse de l'API il faut modifier les valeurs des variables holdsUrl et holdsPort dans le fichier `routes/path.js`.  
+Pour changer l'adresse de l'API il faut modifier les valeurs des variables holdsUrl et holdsPort dans le fichier `routes/path.js`.
+Pour afficher la configuration du swagger il faut remplacer:
+```javascript
+const ui = SwaggerUIBundle({
+	url: "https://petstore.swagger.io/v2/swagger.json", // <= HERE
+	dom_id: '#swagger-ui',
+	deepLinking: true,
+	presets: [
+		SwaggerUIBundle.presets.apis,
+		SwaggerUIStandalonePreset
+	],
+	plugins: [
+		SwaggerUIBundle.plugins.DownloadUrl
+	],
+	layout: "StandaloneLayout"
+});
+```
+par:
+```javascript
+const ui = SwaggerUIBundle({
+	url: "/swagger.json", // <= HERE
+	dom_id: '#swagger-ui',
+	deepLinking: true,
+	presets: [
+		SwaggerUIBundle.presets.apis,
+		SwaggerUIStandalonePreset
+	],
+	plugins: [
+		SwaggerUIBundle.plugins.DownloadUrl
+	],
+	layout: "StandaloneLayout"
+});
+```
+dans le fichier: `node_modules/swagger-ui-dist/index.html`
 
 ## Authentification
 Requêtes d'enregistrement et de connexion de cette api.

@@ -1,0 +1,333 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "KlymbR Application Programming Interface",
+        "version": "2.0.0"
+    },
+    "host": "api.klymbr.com",
+    "basePath": "/v2",
+    "schemes": ["http"],
+    "produces": ["application/json"],
+    "consumes": ["application/json"],
+    "tags": [{
+        "name": "User",
+        "description": "Operations about user"
+    }],
+    "paths": {
+        "/users": {
+            "get": {
+                "tags": ["User"],
+                "summary": "Get all users",
+                "description": "Give an array with personnal users informations",
+                "operationId": "getAllUsers",
+                "parameters": [{
+                    "name": "Authorization",
+                    "in": "header",
+                    "description": "JWT [token]",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["User"],
+                "summary": "Post a new user",
+                "description": "Create a new user",
+                "operationId": "postUser",
+                "parameters": [{
+                    "name": "Authorization",
+                    "in": "header",
+                    "description": "JWT [token]",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }, {
+                    "name": "User",
+                    "in": "body",
+                    "description": "Personnal informations of new user",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/User"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/UserResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/:id": {
+            "get": {
+                "tags": ["User"],
+                "summary": "Get an user",
+                "description": "Give personnal informations of an user",
+                "operationId": "getUser",
+                "parameters": [{
+                    "name": "Authorization",
+                    "in": "header",
+                    "description": "JWT [token]",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }, {
+                    "name": "id",
+                    "in": "path",
+                    "description": "user identifier (_id)",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["User"],
+                "summary": "Patch an user",
+                "description": "Update personnal informations of an user",
+                "operationId": "patchUser",
+                "parameters": [{
+                    "name": "Authorization",
+                    "in": "header",
+                    "description": "JWT [token]",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }, {
+                    "name": "id",
+                    "in": "path",
+                    "description": "User identifier (_id)",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }, {
+                    "name": "User",
+                    "in": "body",
+                    "description": "Personnal informations of new user",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/User"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UserResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["User"],
+                "summary": "Delete an user",
+                "description": "Erase permanently personnal informations of an user",
+                "operationId": "deleteUser",
+                "parameters": [{
+                    "name": "Authorization",
+                    "in": "header",
+                    "description": "JWT [token]",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }, {
+                    "name": "id",
+                    "in": "path",
+                    "description": "User identifier (_id)",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "number"
+                },
+                "birthdate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "object",
+                    "properties": {
+                        "number": {
+                            "type": "number"
+                        },
+                        "street": {
+                            "type": "string"
+                        },
+                        "postalcode": {
+                            "type": "number"
+                        },
+                        "city": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "licenses": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "number": {
+                                "type": "number"
+                            },
+                            "end": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "status": {
+                                "type": "number"
+                            },
+                            "club": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "number"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "UserResponse": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "number"
+                },
+                "birthdate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "object",
+                    "properties": {
+                        "number": {
+                            "type": "number"
+                        },
+                        "street": {
+                            "type": "string"
+                        },
+                        "postalcode": {
+                            "type": "number"
+                        },
+                        "city": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "licenses": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "number": {
+                                "type": "number"
+                            },
+                            "end": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "status": {
+                                "type": "number"
+                            },
+                            "club": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "number"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "created": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        }
+    }
+}

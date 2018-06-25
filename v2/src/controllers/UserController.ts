@@ -29,6 +29,7 @@ export class UserController implements IRegistrableController {
             if (users) { res.json(users); }
         })
         .patch(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+            req.body._id = <string> req.params.id;
             const updatedUser = await this.userService.updateUser(req.body).catch(err => next(err));
             if (updatedUser) { res.json(updatedUser); }
         })

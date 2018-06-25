@@ -1,6 +1,7 @@
 import { injectable } from 'inversify';
 import { Database, IUser, UserSchema } from '../models/User';
 import { logger } from '../utils/Logger';
+import * as bcrypt from 'bcrypt';
 
 export interface IUserRepository {
     findAll(): Promise<Array<IUser>>;
@@ -17,6 +18,9 @@ export class UserRepository implements IUserRepository {
     }
 
     public async create(user: IUser): Promise<IUser> {
+        user.created = new Date;
+        const hash = await bcrypt.hash(user.password, 10);
+        user.password = hash;
         return await Database.connect().then(() => Database.Users.create(user));
     }
 
@@ -27,7 +31,15 @@ export class UserRepository implements IUserRepository {
         if (stored === null) { throw 'update: user not found.'; }
         // undefined isn't handled by mongo, so set to null
         if (user.email) { stored.email = user.email }
-        if (user.password) { stored.password = user.password }
+        if (user.phone) { stored.phone = user.phone }
+        if (user.firstname) { stored.firstname = user.firstname }
+        if (user.lastname) { stored.lastname = user.lastname }
+        if (user.address) {
+            if (user.address.number) { stored.address.number = user.address.number }
+            if (user.address.street) { stored.address.street = user.address.street }
+            if (user.address.postalcode) { stored.address.postalcode = user.address.postalcode }
+            if (user.address.city) { stored.address.city = user.address.city }
+        }
         const saved = await stored.save((err: Error, u: IUser | undefined) => {
             if (err) {
                 logger.error(`Error updating user: ${err}`);
