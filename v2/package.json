@@ -4,7 +4,7 @@
   "description": "Klymbr application programming interface",
   "main": "./src/index.ts",
   "scripts": {
-    "test": "ts-node",
+    "test": "ts-node ./src/index.ts",
     "start": "nodemon",
     "build": "tsc"
   },
@@ -39,6 +39,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "inversify": "^4.13.0",
+    "iridium": "^7.2.5",
     "process": "^0.11.10",
     "recluster": "^0.4.5",
     "reflect-metadata": "^0.1.12",
