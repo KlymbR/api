@@ -105,6 +105,12 @@
                                 "$ref": "#/definitions/UserResponse"
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 }
             },
@@ -144,6 +150,12 @@
                         "schema": {
                             "$ref": "#/definitions/UserResponse"
                         }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 }
             },
@@ -172,6 +184,12 @@
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 }
             }
@@ -326,6 +344,17 @@
                 "created": {
                     "type": "string",
                     "format": "date-time"
+                }
+            }
+        },
+        "ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "error_description": {
+                    "type": "string"
                 }
             }
         }

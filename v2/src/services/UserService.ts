@@ -8,6 +8,7 @@ export interface IUserService {
     createUser(user: IUser): Promise<IUser>;
     updateUser(user: IUser): Promise<IUser>;
     getUser(id: string): Promise<IUser>;
+    removeUser(id: string): Promise<boolean>;
 }
 
 @injectable()
@@ -39,5 +40,9 @@ export class UserService implements IUserService {
         const user = await this.userRepository.find(id);
         user.password = undefined;
         return user;
+    }
+
+    public async removeUser(id: string): Promise<boolean> {
+        return await this.userRepository.remove(id);
     }
 }

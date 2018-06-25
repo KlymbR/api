@@ -18,10 +18,12 @@ class Server {
         this.app = express();
         this.use();
 
+        /*
         this.app.all('*', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
             logger.info(`route: ${req.url}`);
             next();
         });
+        */
 
         this.controllers = container.getAll<IRegistrableController>(TYPES.Controller);
         this.controllers.forEach(controller => controller.register(this.app));
@@ -40,7 +42,6 @@ class Server {
     private use() {
         const swaggerUiAssetPath = require("swagger-ui-dist").getAbsoluteFSPath();
         this.app.use(express.static(swaggerUiAssetPath));
-        console.log(join(__dirname, 'swagger.json'));
         // this.app.use(express.static(join(__dirname, '')));
         this.app.use(compression());
         this.app.use(bodyParser.urlencoded({ extended: true }));
@@ -49,7 +50,6 @@ class Server {
         this.app.use(cors());
         this.app.use((err: Error, req: express.Request,
             res: express.Response, next: express.NextFunction) => {
-            console.log(err);
             if (err.stack) { logger.error(err.stack); }
             res.status(500).json({
                 error: 'server_error',

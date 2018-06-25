@@ -8,6 +8,7 @@ export interface IUserRepository {
     create(user: IUser): Promise<IUser>;
     update(user: IUser): Promise<IUser>;
     find(id: string): Promise<IUser>;
+    remove(id: string): Promise<boolean>;
 }
 
 @injectable()
@@ -28,7 +29,7 @@ export class UserRepository implements IUserRepository {
         const stored: UserSchema | null = await Database.connect().then(() => {
             return Database.Users.findOne({ _id: user._id });
         });
-        if (stored === null) { throw 'update: user not found.'; }
+        if (stored === null) { throw 404; }
         // undefined isn't handled by mongo, so set to null
         if (user.email) { stored.email = user.email }
         if (user.phone) { stored.phone = user.phone }
@@ -52,7 +53,12 @@ export class UserRepository implements IUserRepository {
 
     public async find(id: string): Promise<IUser> {
         const user: IUser | null = await Database.connect().then(() => Database.Users.findOne(id));
-        if (user === null) { throw 'find: user not found.'; }
+        if (user === null) { throw 404; }
         return user;
+    }
+
+    public async remove(id: string): Promise<boolean> {
+        const length = await Database.connect().then(() => Database.Users.remove({ _id: id}));
+        return (length === 0 ? false: true);
     }
 }
