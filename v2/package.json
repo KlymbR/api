@@ -22,6 +22,7 @@
   "homepage": "https://github.com/KlymbR/api#readme",
   "devDependencies": {
     "@types/node": "^10.3.5",
+    "@types/recluster": "^0.4.1",
     "nodemon": "^1.17.5",
     "ts-node": "^7.0.0",
     "typescript": "^2.9.2"
