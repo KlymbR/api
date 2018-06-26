@@ -18,18 +18,28 @@ class Server {
         this.app = express();
         this.use();
 
-        /*
         this.app.all('*', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-            logger.info(`route: ${req.url}`);
+            logger.info(`${req.method}: ${req.url}`);
             next();
         });
-        */
+        this.app.get('/swagger.json', async (req: express.Request, res: express.Response) => {
+            res.sendFile(join(__dirname, 'swagger.json'));
+        });
 
         this.controllers = container.getAll<IRegistrableController>(TYPES.Controller);
         this.controllers.forEach(controller => controller.register(this.app));
 
-        this.app.get('/swagger.json', async (req: express.Request, res: express.Response) => {
-            res.sendFile(join(__dirname, 'swagger.json'));
+        this.app.use((err: Error, req: express.Request,
+            res: express.Response, next: express.NextFunction) => {
+            if (err.stack) { logger.error(err.stack); }
+            next(err);
+        });
+        this.app.use((err: Error, req: express.Request,
+            res: express.Response, next: express.NextFunction) => {
+            res.status(500).json({
+                error: 'server_error',
+                error_description: 'Oops! Something went wrong...'
+            });
         });
     }
 
@@ -40,22 +50,15 @@ class Server {
     }
 
     private use() {
-        const swaggerUiAssetPath = require("swagger-ui-dist").getAbsoluteFSPath();
-        this.app.use(express.static(swaggerUiAssetPath));
-        // this.app.use(express.static(join(__dirname, '')));
         this.app.use(compression());
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(bodyParser.json({ limit: '20mb' }));
         this.app.use(cookieParser());
         this.app.use(cors());
-        this.app.use((err: Error, req: express.Request,
-            res: express.Response, next: express.NextFunction) => {
-            if (err.stack) { logger.error(err.stack); }
-            res.status(500).json({
-                error: 'server_error',
-                error_description: 'Oops! Something went wrong...'
-            });
-        });
+
+        const swaggerUiAssetPath = require("swagger-ui-dist").getAbsoluteFSPath();
+        this.app.use(express.static(swaggerUiAssetPath));
+        // this.app.use(express.static(join(__dirname, '')));
     }
 }
 

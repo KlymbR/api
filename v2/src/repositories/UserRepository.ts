@@ -8,7 +8,7 @@ export interface IUserRepository {
     create(user: IUser): Promise<IUser>;
     update(user: IUser): Promise<IUser>;
     find(id: string): Promise<IUser>;
-    remove(id: string): Promise<boolean>;
+    remove(id: string): Promise<number>;
 }
 
 @injectable()
@@ -57,8 +57,9 @@ export class UserRepository implements IUserRepository {
         return user;
     }
 
-    public async remove(id: string): Promise<boolean> {
-        const length = await Database.connect().then(() => Database.Users.remove({ _id: id}));
-        return (length === 0 ? false: true);
+    public async remove(id: string): Promise<number> {
+        const length = await Database.connect().then(() => Database.Users.remove({ _id: id }));
+        if (length === 0) { throw 404; }
+        return length;
     }
 }
