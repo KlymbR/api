@@ -8,7 +8,7 @@ import container from './inversify.config';
 import { logger } from './utils/Logger';
 import { IRegistrableController } from './controllers/IRegistrableController';
 import { join } from 'path';
-import { SwaggerUIBundle, SwaggerUIStandalonePreset } from "swagger-ui-dist";
+import { SwaggerUIBundle, SwaggerUIStandalonePreset } from 'swagger-ui-dist';
 
 class Server {
     private app: express.Application;

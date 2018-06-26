@@ -16,6 +16,12 @@ export class UserService implements IUserService {
     @inject(TYPES.UserRepository)
     private userRepository: UserRepository;
 
+    private rebuildDate(user: IUser): IUser {
+        user.birthdate = new Date(user.birthdate);
+        user.licenses.forEach(l => l.end = new Date(l.end));
+        return user;
+    }
+
     public async getUsers(): Promise<Array<IUser>> {
         const users = await this.userRepository.findAll();
         return users.map((u) => {
@@ -25,13 +31,13 @@ export class UserService implements IUserService {
     }
 
     public async createUser(user: IUser): Promise<IUser> {
-        const u = await this.userRepository.create(user);
+        const u = await this.userRepository.create(this.rebuildDate(user));
         u.password = undefined;
         return u;
     }
 
     public async updateUser(user: IUser): Promise<IUser> {
-        const u = await this.userRepository.update(user);
+        const u = await this.userRepository.update(this.rebuildDate(user));
         u.password = undefined;
         return u;
     }

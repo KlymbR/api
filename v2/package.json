@@ -4,7 +4,7 @@
   "description": "Klymbr application programming interface",
   "main": "./src/index.ts",
   "scripts": {
-    "test": "ts-node ./src/index.ts",
+    "test": "ts-node node_modules/jasmine/bin/jasmine",
     "start": "nodemon",
     "build": "tsc"
   },
@@ -28,9 +28,15 @@
     "@types/cookie-parser": "^1.4.1",
     "@types/cors": "^2.8.4",
     "@types/express": "^4.16.0",
+    "@types/jasmine": "^2.8.8",
+    "@types/jasmine-expect": "^3.8.1",
     "@types/node": "^10.3.5",
     "@types/recluster": "^0.4.1",
+    "@types/request": "^2.47.1",
+    "jasmine": "^3.1.0",
+    "jasmine-expect": "^3.8.3",
     "nodemon": "^1.17.5",
+    "request": "^2.87.0",
     "ts-node": "^7.0.0",
     "typescript": "^2.9.2"
   },
