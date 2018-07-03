@@ -357,7 +357,8 @@ Pour obtenir les informations des voies.
         "_id": "5ab4043135dc0d45e17f2836",  
         "path_id": 1,  
         "path_free": false,  
-        "path_difficulty": "6A"  
+        "path_difficulty": "6A",
+				"color": "0d98ba"
     }  
 ]
 ```
@@ -389,7 +390,8 @@ Pour obtenir les informations d'une voie avec son id
         "_id": "5ab4043135dc0d45e17f2836",  
         "path_id": 1,  
         "path_free": false,  
-        "path_difficulty": "6A"  
+        "path_difficulty": "6A",
+				"color": "0d98ba"
     }  
 ]
 ```
@@ -503,7 +505,8 @@ Cette commande est réservée aux administrateurs.
   	"grip_id":2,  
   	"grip_data":143,  
   	"grip_on":true  
-  }]  
+  }],
+	"color": "0d98ba"
 }
 ```
 

@@ -62,9 +62,9 @@ router.post('/path/free', function (req, se, next) {
   }
   let request = url + '/path/free'
   axios.post(request, {
-    path_id: req.body.path_id,
-    path_free: req.body.path_free
-  })
+      path_id: req.body.path_id,
+      path_free: req.body.path_free
+    })
     .then(function (res) {
       let json = CircularJSON.stringify(res)
       let data = CircularJSON.parse(json).data
@@ -94,11 +94,12 @@ router.post('/path/add', function (req, se, next) {
       }
       let request = url + '/path/add'
       axios.post(request, {
-        path_id: req.body.path_id,
-        path_free: req.body.path_free,
-        path_difficulty: req.body.path_difficulty,
-        grips: req.body.grips
-      })
+          path_id: req.body.path_id,
+          path_free: req.body.path_free,
+          path_difficulty: req.body.path_difficulty,
+          grips: req.body.grips,
+          color: req.body.color
+        })
         .then(function (res) {
           let json = CircularJSON.stringify(res)
           let data = CircularJSON.parse(json).data
@@ -129,8 +130,8 @@ router.post('/path/delete', function (req, se, next) {
       }
       let request = url + '/path/delete'
       axios.post(request, {
-        path_id: req.body.path_id
-      })
+          path_id: req.body.path_id
+        })
         .then(function (res) {
           let json = CircularJSON.stringify(res)
           let data = CircularJSON.parse(json).data
@@ -161,9 +162,9 @@ router.post('/grip/delete', function (req, se, next) {
       }
       let request = url + '/grip/delete'
       axios.post(request, {
-        path_id: req.body.path_id,
-        grip_id: req.body.grip_id
-      })
+          path_id: req.body.path_id,
+          grip_id: req.body.grip_id
+        })
         .then(function (res) {
           let json = CircularJSON.stringify(res)
           let data = CircularJSON.parse(json).data
@@ -187,7 +188,7 @@ router.post('/grip/add', function (req, se, next) {
     if (err) return next(err)
     else {
       if (req.body.path_id === undefined || req.body.grip_id === undefined ||
-          req.body.grip_data === undefined || req.body.grip_on === undefined) {
+        req.body.grip_data === undefined || req.body.grip_on === undefined) {
         return next({
           code: 400,
           success: false,
@@ -196,11 +197,11 @@ router.post('/grip/add', function (req, se, next) {
       }
       let request = url + '/grip/add'
       axios.post(request, {
-        path_id: req.body.path_id,
-        grip_id: req.body.grip_id,
-        grip_data: req.body.grip_data,
-        grip_on: req.body.grip_on
-      })
+          path_id: req.body.path_id,
+          grip_id: req.body.grip_id,
+          grip_data: req.body.grip_data,
+          grip_on: req.body.grip_on
+        })
         .then(function (res) {
           let json = CircularJSON.stringify(res)
           let data = CircularJSON.parse(json).data
