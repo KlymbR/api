@@ -8,6 +8,14 @@ import { UserController } from './controllers/UserController';
 import { UserService } from './services/UserService';
 import { UserRepository } from './repositories/UserRepository';
 
+import { RoomController } from './controllers/RoomController';
+import { RoomService } from './services/RoomService';
+import { RoomRepository } from './repositories/RoomRepository';
+
+import { PathController } from './controllers/PathController';
+import { PathService } from './services/PathService';
+import { PathRepository } from './repositories/PathRepository';
+
 const container = new Container();
 
 container.bind<IRegistrableController>(TYPES.Controller).to(UserController);

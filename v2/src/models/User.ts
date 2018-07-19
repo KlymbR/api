@@ -54,7 +54,7 @@ export class UserSchema extends Instance<IUser, UserSchema> implements IUser {
     @Property(String, true) public email: string;
     @Property(String, true) public password: string;
     @Property([{
-        id: Number,
+        fed: Number,
         number: Number,
         end: Date,
         status: Number,

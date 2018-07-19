@@ -41,6 +41,7 @@ export class UserRepository implements IUserRepository {
             if (user.address.postalcode) { stored.address.postalcode = user.address.postalcode }
             if (user.address.city) { stored.address.city = user.address.city }
         }
+        if (user.licenses) { stored.licenses = user.licenses }
         const saved = await stored.save((err: Error, u: IUser | undefined) => {
             if (err) {
                 logger.error(`Error updating user: ${err}`);
