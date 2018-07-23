@@ -22,4 +22,12 @@ container.bind<IRegistrableController>(TYPES.Controller).to(UserController);
 container.bind<UserService>(TYPES.UserService).to(UserService);
 container.bind<UserRepository>(TYPES.UserRepository).to(UserRepository);
 
+container.bind<IRegistrableController>(TYPES.Controller).to(RoomController);
+container.bind<RoomService>(TYPES.RoomService).to(RoomService);
+container.bind<RoomRepository>(TYPES.RoomRepository).to(RoomRepository);
+
+container.bind<IRegistrableController>(TYPES.Controller).to(PathController);
+container.bind<PathService>(TYPES.PathService).to(PathService);
+container.bind<PathRepository>(TYPES.PathRepository).to(PathRepository);
+
 export default container;

@@ -15,7 +15,7 @@ export interface IRoom {
     longitude: number;
 }
 
-@Index({ name: 1 })
+@Index({ name: 2 })
 @Collection('rooms')
 export class RoomSchema extends Instance<IRoom, RoomSchema> implements IRoom {
     @ObjectID public _id: string;

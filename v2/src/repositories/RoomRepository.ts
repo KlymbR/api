@@ -28,9 +28,9 @@ export class RoomRepository implements IRoomRepository {
         });
         if (stored === null) { throw 404; }
         // undefined isn't handled by mongo, so set to null
-        if (room.title) { stored.email = room.title }
-        if (room.latitude) { stored.phone = room.latitude }
-        if (room.longitude) { stored.firstname = room.longitude }
+        if (room.title) { stored.title = room.title }
+        if (room.latitude) { stored.latitude = room.latitude }
+        if (room.longitude) { stored.longitude = room.longitude }
         const saved = await stored.save((err: Error, u: IRoom | undefined) => {
             if (err) {
                 logger.error(`Error updating room: ${err}`);

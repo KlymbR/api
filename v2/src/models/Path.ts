@@ -40,7 +40,7 @@ export class PathSchema extends Instance<IPath, PathSchema> implements IPath {
         data: Number,
         on: Boolean
     }], true) public grips: Array<IGrip>;
-    @Property(Number, true) public average: number;
+    @Property(Number, true) public average: Number;
     @Property({
         time: Number,
         firstname: String,

@@ -42,7 +42,7 @@ export interface IUser {
     created?: Date;
 }
 
-@Index({ name: 1 })
+@Index({ name: 3 })
 @Collection('users')
 export class UserSchema extends Instance<IUser, UserSchema> implements IUser {
     @ObjectID public _id: string;

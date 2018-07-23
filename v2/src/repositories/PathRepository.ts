@@ -28,11 +28,10 @@ export class PathRepository implements IPathRepository {
         });
         if (stored === null) { throw 404; }
         // undefined isn't handled by mongo, so set to null
-        if (path.free) { stored.email = path.free }
-        if (path.difficulty) { stored.phone = path.difficulty }
-        if (path.average) { stored.firstname = path.average }
+        if (path.free) { stored.free = path.free }
+        if (path.difficulty) { stored.difficulty = path.difficulty }
         if (path.grips) { stored.grips = path.grips }
-        if (path.average) { stored.firstname = path.average }
+        if (path.average) { stored.average = path.average }
         if (path.best) {
             if (path.best.time) { stored.best.time = path.best.time }
             if (path.best.firstname) { stored.best.firstname = path.best.firstname }
