@@ -50,6 +50,13 @@ export class UserController implements IRegistrableController {
                     if (err === 404) { this.notFound(req, res); } else { next(err); }
                 });
                 if (removedUser) { res.status(200).end(); }
+            })
+            app.route('/v2/users/authenticate')
+            .post(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+                const user = await this.userService.authenticateUser(<string>req.body.email, <string>req.body.password).catch((err) => {
+                    if (err === 404) { this.notFound(req, res); } else { next(err); }
+                })
+                if (user) { res.status(200).json(user); }
             });
     }
 }

@@ -2,6 +2,8 @@ import { injectable, inject } from 'inversify';
 import { IUser } from '../models/User';
 import { UserRepository } from '../repositories/UserRepository';
 import TYPES from '../types';
+import * as bcrypt from 'bcrypt';
+import * as jwt from 'jsonwebtoken';
 
 export interface IUserService {
     getUsers(): Promise<Array<IUser>>;
@@ -9,6 +11,12 @@ export interface IUserService {
     updateUser(user: IUser): Promise<IUser>;
     getUser(id: string): Promise<IUser>;
     removeUser(id: string): Promise<number>;
+    authenticateUser(email: string, pwd: string): Promise<IUserRet>;
+}
+
+interface IUserRet {
+    user: IUser,
+    token: string
 }
 
 @injectable()
@@ -50,5 +58,18 @@ export class UserService implements IUserService {
 
     public async removeUser(id: string): Promise<number> {
         return await this.userRepository.remove(id);
+    }
+
+    public async authenticateUser(email: string, pwd: string): Promise<IUserRet> {
+        const user = await this.userRepository.findByEmail(email);
+        const res = await bcrypt.compare(pwd, user.password);
+        user.password = undefined;
+        if (res) {
+            const token = await jwt.sign({ firstname: user.firstname, id: user._id }, 'klymbrToken');
+            return {
+                user,
+                token
+            };
+        }
     }
 }

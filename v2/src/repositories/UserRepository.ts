@@ -58,6 +58,12 @@ export class UserRepository implements IUserRepository {
         return user;
     }
 
+    public async findByEmail(email: string): Promise<IUser> {
+        const user: IUser | null = await Database.connect().then(() => Database.Users.findOne({email: email}));
+        if (user === null) { throw 404; }
+        return user;
+    }
+
     public async remove(id: string): Promise<number> {
         const length = await Database.connect().then(() => Database.Users.remove({ _id: id }));
         if (length === 0) { throw 404; }

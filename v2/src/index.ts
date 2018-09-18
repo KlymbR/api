@@ -3,6 +3,7 @@ import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import * as cors from 'cors';
+import * as expresJwt from 'express-jwt';
 import TYPES from './types';
 import container from './inversify.config';
 import { logger } from './utils/Logger';
@@ -36,10 +37,16 @@ class Server {
         });
         this.app.use((err: Error, req: express.Request,
             res: express.Response, next: express.NextFunction) => {
-            res.status(500).json({
-                error: 'server_error',
-                error_description: 'Oops! Something went wrong...'
-            });
+            if (err.name === 'UnauthorizedError')
+                res.status(500).json({
+                    error: 'server_error',
+                    error_description: 'Invalid Token'
+                });
+            else
+                res.status(500).json({
+                    error: 'server_error',
+                    error_description: 'Oops! Something went wrong...'
+                });
         });
     }
 
@@ -55,7 +62,13 @@ class Server {
         this.app.use(bodyParser.json({ limit: '20mb' }));
         this.app.use(cookieParser());
         this.app.use(cors());
-
+        this.app.use(expresJwt({ secret: 'klymbrToken' }).unless({
+            path: [
+                // public routes that don't require authentication
+                '/v2/users/authenticate',
+                '/v2/users/'
+            ]
+        }));
         const swaggerUiAssetPath = require("swagger-ui-dist").getAbsoluteFSPath();
         this.app.use(express.static(swaggerUiAssetPath));
         // this.app.use(express.static(join(__dirname, '')));
