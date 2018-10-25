@@ -18,6 +18,7 @@ interface IBest {
     time: number;
     firstname: string;
     lastname: string;
+    id: string;
 }
 
 export interface IPath {
@@ -44,7 +45,8 @@ export class PathSchema extends Instance<IPath, PathSchema> implements IPath {
     @Property({
         time: Number,
         firstname: String,
-        lastname: String
+        lastname: String,
+        id: String
     }, true) public best: IBest;
 }
 

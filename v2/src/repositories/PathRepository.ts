@@ -36,6 +36,7 @@ export class PathRepository implements IPathRepository {
             if (path.best.time) { stored.best.time = path.best.time }
             if (path.best.firstname) { stored.best.firstname = path.best.firstname }
             if (path.best.lastname) { stored.best.lastname = path.best.lastname }
+            if (path.best.id) { stored.best.id = path.best.id }
         }
         const saved = await stored.save((err: Error, u: IPath | undefined) => {
             if (err) {
