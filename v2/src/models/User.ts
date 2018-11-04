@@ -21,6 +21,12 @@ interface ILicense {
     club: IClub;
 }
 
+interface ITshirt {
+    freq: number;
+    altitude: number;
+    timestamp: Date;
+}
+
 interface IAddress {
     number: number;
     street: string;
@@ -66,6 +72,12 @@ export class UserSchema extends Instance<IUser, UserSchema> implements IUser {
         postalcode: Number,
         city: String
     }, true) public address: IAddress;
+    @Property([{
+        freq: Number,
+        altitude: Number,
+        timestamp: Date
+    }], false) public tshirt: Array<ITshirt>;
+    @Property(Boolean, true) public isAdmin: boolean;
     @Property(Date, true) public created: Date;
 }
 
