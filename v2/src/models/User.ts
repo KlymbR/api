@@ -7,6 +7,7 @@ import {
     Property,
     ObjectID
 } from 'iridium';
+import { Timestamp } from 'bson';
 
 interface IClub {
     id: number;
@@ -75,10 +76,10 @@ export class UserSchema extends Instance<IUser, UserSchema> implements IUser {
     @Property([{
         freq: Number,
         altitude: Number,
-        timestamp: Date
+        timestamp: Timestamp
     }], false) public tshirt: Array<ITshirt>;
     @Property(Boolean, true) public isAdmin: boolean;
-    @Property(Date, true) public created: Date;
+    @Property(Timestamp, true) public created: Date;
 }
 
 class UserDatabase extends Core {
