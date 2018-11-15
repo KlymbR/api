@@ -14,6 +14,7 @@ import { SwaggerUIBundle, SwaggerUIStandalonePreset } from 'swagger-ui-dist';
 class Server {
   private app: express.Application;
   private controllers: IRegistrableController[];
+  private swaggerUiAssetPath = require('swagger-ui-dist').getAbsoluteFSPath();
 
   constructor() {
     this.app = express();
@@ -120,8 +121,7 @@ class Server {
         ]
       })
     );
-    const swaggerUiAssetPath = require('swagger-ui-dist').getAbsoluteFSPath();
-    this.app.use(express.static(swaggerUiAssetPath));
+    this.app.use(express.static(this.swaggerUiAssetPath));
     // this.app.use(express.static(join(__dirname, '')));
   }
 }
