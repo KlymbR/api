@@ -112,7 +112,8 @@ class Server {
           // public routes that don't require authentication
           '/v2/users/authenticate',
           '/v2/users',
-          '/swagger.json'
+          '/swagger.json',
+          '/'
         ]
       })
     );

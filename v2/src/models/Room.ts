@@ -28,4 +28,4 @@ class RoomDatabase extends Core {
     public Rooms = new Model<IRoom, RoomSchema>(this, RoomSchema);
 }
 
-export const Database = new RoomDatabase({ database: 'test_db' });
+export const Database = new RoomDatabase({ database: 'klymbr' });

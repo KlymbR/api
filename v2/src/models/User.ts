@@ -102,4 +102,4 @@ class UserDatabase extends Core {
   public Users = new Model<IUser, UserSchema>(this, UserSchema);
 }
 
-export const Database = new UserDatabase({ database: 'test_db' });
+export const Database = new UserDatabase({ database: 'klymbr' });

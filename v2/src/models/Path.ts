@@ -54,4 +54,4 @@ class PathDatabase extends Core {
     public Paths = new Model<IPath, PathSchema>(this, PathSchema);
 }
 
-export const Database = new PathDatabase({ database: 'test_db' });
+export const Database = new PathDatabase({ database: 'klymbr' });
