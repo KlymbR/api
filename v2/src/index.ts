@@ -113,6 +113,9 @@ class Server {
           '/v2/users/authenticate',
           '/v2/users',
           '/swagger.json',
+          '/swagger-ui.css',
+          '/swagger-ui-bundle.js',
+          '/swagger-ui-standalone-preset.js',
           '/'
         ]
       })
