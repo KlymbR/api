@@ -30,28 +30,23 @@ app.use(morgan('dev'))
 
 // Add headers
 app.use(function (req, res, next) {
+
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
 
   // Pass to next layer of middleware
   next();
 });
-
-app.options("/*", function (req, res) {
-
-  // Request methods you wish to allow
-
-  // Request headers you wish to allow
-  //res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Headers', req.headers['access-control-request-headers']);
-
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  //res.setHeader('Access-Control-Allow-Credentials', true);
-  res.sendStatus(200);
-});
-
 app.use('/', require('./routes/user').bAuth)
 
 app.use(function (req, res, next) {
@@ -81,7 +76,9 @@ app.use('/', require('./routes/stat'))
 
 // basic 404 handler
 app.use((req, res) => {
-  res.status(404).send({ url: req.originalUrl + ' Not Found' })
+  res.status(404).send({
+    url: req.originalUrl + ' Not Found'
+  })
 })
 
 // basic error handler
