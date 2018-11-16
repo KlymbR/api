@@ -11,6 +11,8 @@ import { IRegistrableController } from './controllers/IRegistrableController';
 import { join } from 'path';
 import { SwaggerUIBundle, SwaggerUIStandalonePreset } from 'swagger-ui-dist';
 
+import * as fs from 'fs';
+
 class Server {
   private app: express.Application;
   private controllers: IRegistrableController[];
@@ -18,6 +20,11 @@ class Server {
 
   constructor() {
     this.app = express();
+    const indexContent = fs.readFileSync(`${this.swaggerUiAssetPath}/index.html`)
+    .toString()
+    .replace("https://petstore.swagger.io/v2/swagger.json", "https://api.klymbr.com/swagger.json");
+    this.app.get("/", (req, res) => res.send(indexContent));
+    this.app.get("/index.html", (req, res) => res.send(indexContent));
     this.use();
 
     this.app.all(
