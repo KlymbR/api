@@ -663,17 +663,19 @@
           }
         },
         "tshirt": {
-          "type": "object",
-          "properties": {
-            "freq": {
-              "type": "number"
-            },
-            "altitude": {
-              "type": "number"
-            },
-            "timestamp": {
-              "type": "string",
-              "format": "date-time"
+          "type": "array",
+          "items": {
+            "properties": {
+              "freq": {
+                "type": "number"
+              },
+              "altitude": {
+                "type": "number"
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time"
+              }
             }
           }
         },
@@ -757,7 +759,7 @@
         },
         "tshirt": {
           "type": "array",
-          "items":{
+          "items": {
             "properties": {
               "freq": {
                 "type": "number"
