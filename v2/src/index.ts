@@ -118,8 +118,8 @@ class Server {
       expresJwt({ secret: 'klymbrToken' }).unless({
         path: [
           // public routes that don't require authentication
-          '/v2/users/authenticate',
-          '/v2/users',
+          '/users/authenticate',
+          '/users',
           '/swagger.json',
           '/swagger-ui.css',
           '/swagger-ui-bundle.js',
