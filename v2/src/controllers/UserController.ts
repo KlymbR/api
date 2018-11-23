@@ -22,7 +22,7 @@ export class UserController implements IRegistrableController {
     }
 
     public register(app: express.Application): void {
-        app.route('/v2/users/')
+        app.route('/users/')
             .get(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
                 const users = await this.userService.getUsers().catch(err => next(err));
                 if (users) { res.status(200).json(users); }
@@ -31,7 +31,7 @@ export class UserController implements IRegistrableController {
                 const createdUser = await this.userService.createUser(<IUser>req.body).catch(err => next(err));
                 if (createdUser) { res.status(201).json(createdUser); }
             })
-        app.route('/v2/users/:id')
+        app.route('/users/:id')
             .get(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
                 const user = await this.userService.getUser(<string>req.params.id).catch((err) => {
                     if (err === 404) { this.notFound(req, res); } else { next(err); }

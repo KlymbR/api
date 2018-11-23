@@ -5,8 +5,9 @@
     "version": "2.0.0"
   },
   "host": "api.klymbr.com",
-  "basePath": "/v2",
+  "basePath": "/",
   "schemes": [
+    "https",
     "http"
   ],
   "produces": [
@@ -665,17 +666,19 @@
           }
         },
         "tshirt": {
-          "type": "object",
-          "properties": {
-            "freq": {
-              "type": "number"
-            },
-            "altitude": {
-              "type": "number"
-            },
-            "timestamp": {
-              "type": "string",
-              "format": "date-time"
+          "type": "array",
+          "items": {
+            "properties": {
+              "freq": {
+                "type": "number"
+              },
+              "altitude": {
+                "type": "number"
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time"
+              }
             }
           }
         },
@@ -758,17 +761,19 @@
           }
         },
         "tshirt": {
-          "type": "object",
-          "properties": {
-            "freq": {
-              "type": "number"
-            },
-            "altitude": {
-              "type": "number"
-            },
-            "timestamp": {
-              "type": "string",
-              "format": "date-time"
+          "type": "array",
+          "items": {
+            "properties": {
+              "freq": {
+                "type": "number"
+              },
+              "altitude": {
+                "type": "number"
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time"
+              }
             }
           }
         },
