@@ -22,7 +22,7 @@ export class PathController implements IRegistrableController {
     }
 
     public register(app: express.Application): void {
-        app.route('/v2/paths/')
+        app.route('/paths/')
             .get(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
                 const paths = await this.pathService.getPaths().catch(err => next(err));
                 if (paths) { res.status(200).json(paths); }
@@ -31,7 +31,7 @@ export class PathController implements IRegistrableController {
                 const createdPath = await this.pathService.createPath(<IPath>req.body).catch(err => next(err));
                 if (createdPath) { res.status(201).json(createdPath); }
             })
-        app.route('/v2/paths/:id')
+        app.route('/paths/:id')
             .get(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
                 const path = await this.pathService.getPath(<string>req.params.id).catch((err) => {
                     if (err === 404) { this.notFound(req, res); } else { next(err); }

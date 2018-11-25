@@ -3,7 +3,7 @@ import 'jasmine-expect';
 import * as request from 'request';
 import { IPath } from '../src/models/Path';
 
-const url = 'http://localhost:8080/v2/paths';
+const url = 'http://localhost:8080/paths';
 const example: IPath = {
     free: true,
     difficulty: '6A',

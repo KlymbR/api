@@ -3,7 +3,7 @@ import 'jasmine-expect';
 import * as request from 'request';
 import { IUser } from '../src/models/User';
 
-const url = 'http://localhost:8080/v2/users';
+const url = 'http://localhost:8080/users';
 const example: IUser = {
     firstname: 'Jasmine',
     lastname: 'KLYMBR',

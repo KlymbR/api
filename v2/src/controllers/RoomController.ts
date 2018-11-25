@@ -22,7 +22,7 @@ export class RoomController implements IRegistrableController {
     }
 
     public register(app: express.Application): void {
-        app.route('/v2/rooms/')
+        app.route('/rooms/')
             .get(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
                 const rooms = await this.roomService.getRooms().catch(err => next(err));
                 if (rooms) { res.status(200).json(rooms); }
@@ -31,7 +31,7 @@ export class RoomController implements IRegistrableController {
                 const createdRoom = await this.roomService.createRoom(<IRoom>req.body).catch(err => next(err));
                 if (createdRoom) { res.status(201).json(createdRoom); }
             })
-        app.route('/v2/rooms/:id')
+        app.route('/rooms/:id')
             .get(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
                 const room = await this.roomService.getRoom(<string>req.params.id).catch((err) => {
                     if (err === 404) { this.notFound(req, res); } else { next(err); }

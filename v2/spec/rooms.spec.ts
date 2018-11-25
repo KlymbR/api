@@ -3,7 +3,7 @@ import 'jasmine-expect';
 import * as request from 'request';
 import { IRoom } from '../src/models/Room';
 
-const url = 'http://localhost:8080/v2/rooms';
+const url = 'http://localhost:8080/rooms';
 const example: IRoom = {
     title: 'Salle de la Rochette',
     latitude: 43.8417705,
