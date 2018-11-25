@@ -33,6 +33,7 @@ describe('/paths', () => {
 
         expect(body).toHaveNumber('average');
 
+        expect(body.best).toHaveString('id');
         expect(body.best).toHaveNumber('time');
         expect(body.best).toHaveString('firstname');
         expect(body.best).toHaveString('lastname');
