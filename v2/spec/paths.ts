@@ -14,6 +14,7 @@ const example: IPath = {
     }],
     average: 76,
     best: {
+        id: 'idtest',
         time: 63,
         firstname: 'Moha',
         lastname: 'La Squale'
