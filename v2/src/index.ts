@@ -91,7 +91,7 @@ class Server {
   }
 
   private use() {
-    this.app.use(function (req, res, next) {
+    /*this.app.use(function (req, res, next) {
 
       // Website you wish to allow to connect
       res.setHeader('Access-Control-Allow-Origin', '*');
@@ -108,12 +108,12 @@ class Server {
 
       // Pass to next layer of middleware
       next();
-    });
+    });*/
     this.app.use(compression());
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json({ limit: '20mb' }));
     this.app.use(cookieParser());
-    //this.app.use(cors());
+    this.app.use(cors());
     this.app.use(
       expresJwt({ secret: 'klymbrToken' }).unless({
         path: [
