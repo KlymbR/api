@@ -51,12 +51,15 @@ export class UserController implements IRegistrableController {
                 });
                 if (removedUser) { res.status(200).end(); }
             })
-            app.route('/users/authenticate')
+        app.route('/users/authenticate')
             .post(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
                 const user = await this.userService.authenticateUser(<string>req.body.email, <string>req.body.password).catch((err) => {
                     if (err === 404) { this.notFound(req, res); } else { next(err); }
                 })
-                if (user) { res.status(200).json(user); }
+                if (user) {
+                    res.cookie('authToken', user.token);
+                    res.status(200).json(user);
+                }
             });
     }
 }
