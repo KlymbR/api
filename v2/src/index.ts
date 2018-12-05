@@ -120,7 +120,11 @@ class Server {
           // public routes that don't require authentication
           '/users/authenticate',
           '/users',
-          '/swagger.json'
+          '/swagger.json',
+          '/swagger-ui.css',
+          '/swagger-ui-bundle.js',
+          '/swagger-ui-standalone-preset.js',
+          '/'
         ]
       })
     );
