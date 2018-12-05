@@ -124,6 +124,9 @@ class Server {
           '/swagger-ui.css',
           '/swagger-ui-bundle.js',
           '/swagger-ui-standalone-preset.js',
+          '/favicon-16x16.png',
+          '/favicon-32x32.png',
+          '/favicon.ico',
           '/'
         ]
       })
