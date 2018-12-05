@@ -113,7 +113,7 @@ class Server {
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json({ limit: '20mb' }));
     this.app.use(cookieParser());
-    this.app.use(cors());
+    //this.app.use(cors());
     this.app.use(
       expresJwt({ secret: 'klymbrToken' }).unless({
         path: [
