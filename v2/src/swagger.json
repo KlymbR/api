@@ -23,6 +23,41 @@
     }
   ],
   "paths": {
+    "/users/authenticate": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Authenticate user",
+        "description": "Authenticate user",
+        "operationId": "AuthUser",
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "description": "Personnal informations of new user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "logged",
+            "schema": {
+              "$ref": "#/definitions/userAuthResponse"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/users": {
       "get": {
         "tags": [
@@ -48,6 +83,12 @@
               "items": {
                 "$ref": "#/definitions/UserResponse"
               }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -82,6 +123,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -237,6 +284,12 @@
               "items": {
                 "$ref": "#/definitions/PathResponse"
               }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -681,9 +734,6 @@
               }
             }
           }
-        },
-        "isAdmin": {
-          "type": "boolean"
         }
       }
     },
@@ -777,12 +827,32 @@
             }
           }
         },
-        "isAdmin": {
-          "type": "boolean"
-        },
         "created": {
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "userAuth": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "userAuthResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "$ref": "#/definitions/User"
+        },
+        "token": {
+          "type": "string"
         }
       }
     },
@@ -917,7 +987,9 @@
         "latitude": {
           "type": "number"
         },
-        "longitude": null
+        "longitude": {
+          "type": "object"
+        }
       }
     },
     "ErrorResponse": {
