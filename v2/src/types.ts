@@ -5,6 +5,8 @@ const TYPES = {
     RoomService: Symbol('RoomService'),
     PathRepository: Symbol('PathRepository'),
     PathService: Symbol('PathService'),
+    RightRepository: Symbol('RightRepository'),
+    RightService: Symbol('RightService'),
     Controller: Symbol('Controller')
 }
 

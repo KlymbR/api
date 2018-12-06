@@ -25,6 +25,7 @@ export interface IPath {
     _id?: string;
     free: boolean;
     difficulty: string;
+    color: string;
     grips: Array<IGrip>;
     average: Number;
     best: IBest;
@@ -36,6 +37,7 @@ export class PathSchema extends Instance<IPath, PathSchema> implements IPath {
     @ObjectID public _id: string;
     @Property(Boolean, true) public free: boolean;
     @Property(String, true) public difficulty: string;
+    @Property(String, true) public color: string;
     @Property([{
         id: Number,
         data: Number,

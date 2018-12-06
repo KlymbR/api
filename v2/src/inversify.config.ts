@@ -16,6 +16,10 @@ import { PathController } from './controllers/PathController';
 import { PathService } from './services/PathService';
 import { PathRepository } from './repositories/PathRepository';
 
+import { RightController } from './controllers/RightController';
+import { RightService } from './services/RightService';
+import { RightRepository } from './repositories/RightRepository';
+
 const container = new Container();
 
 container.bind<IRegistrableController>(TYPES.Controller).to(UserController);
@@ -29,5 +33,9 @@ container.bind<RoomRepository>(TYPES.RoomRepository).to(RoomRepository);
 container.bind<IRegistrableController>(TYPES.Controller).to(PathController);
 container.bind<PathService>(TYPES.PathService).to(PathService);
 container.bind<PathRepository>(TYPES.PathRepository).to(PathRepository);
+
+container.bind<IRegistrableController>(TYPES.Controller).to(RightController);
+container.bind<RightService>(TYPES.RightService).to(RightService);
+container.bind<RightRepository>(TYPES.RightRepository).to(RightRepository);
 
 export default container;
