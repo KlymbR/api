@@ -5,6 +5,7 @@ import * as bcrypt from 'bcrypt';
 
 export interface IUserRepository {
     findAll(): Promise<Array<IUser>>;
+    updatePass(user: IUser): Promise<IUser>;
     create(user: IUser): Promise<IUser>;
     update(user: IUser): Promise<IUser>;
     find(id: string): Promise<IUser>;
@@ -23,6 +24,22 @@ export class UserRepository implements IUserRepository {
         const hash = await bcrypt.hash(user.password, 10);
         user.password = hash;
         return await Database.connect().then(() => Database.Users.create(user));
+    }
+
+    public async updatePass(user: IUser): Promise<IUser> {
+        const stored: UserSchema | null = await Database.connect().then(() => {
+            return Database.Users.findOne({ _id: user._id });
+        })
+        if (stored === null) { throw 404; }
+        if (user.password) { stored.password = user.password; }
+        const saved = await stored.save((err: Error, u: IUser | undefined) => {
+            if (err) {
+                logger.error(`Error updating user: ${err}`);
+                throw err;
+            }
+            return u;
+        });
+        return saved;
     }
 
     public async update(user: IUser): Promise<IUser> {
@@ -59,7 +76,7 @@ export class UserRepository implements IUserRepository {
     }
 
     public async findByEmail(email: string): Promise<IUser> {
-        const user: IUser | null = await Database.connect().then(() => Database.Users.findOne({email: email}));
+        const user: IUser | null = await Database.connect().then(() => Database.Users.findOne({ email: email }));
         if (user === null) { throw 404; }
         return user;
     }

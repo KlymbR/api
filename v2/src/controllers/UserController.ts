@@ -5,7 +5,7 @@ import { UserService } from '../services/UserService';
 import { IUser } from '../models/User';
 import { IRegistrableController } from './IRegistrableController';
 import Mail from "../utils/Mail";
-
+import * as bcrypt from 'bcrypt';
 
 @injectable()
 export class UserController implements IRegistrableController {
@@ -74,12 +74,19 @@ export class UserController implements IRegistrableController {
                 });
                 if (user) {
                     const newPass = this.getRandomInt(9999);
-                    Mail.to = user.email;
-                    Mail.subject = "Password Recovery";
-                    Mail.message = `This is your new password : ${newPass}`;
-                    let result = await Mail.sendMail();
+                    const hash = await bcrypt.hash(newPass.toString(), 10);
+                    user.password = hash
+                    const updateUser = await this.userService.updatePassword(user).catch((err) => {
+                        if (err === 404) { this.notFound(req, res); } else { next(err); }
+                    });
+                    if (updateUser) {
+                        Mail.to = user.email;
+                        Mail.subject = "Password Recovery";
+                        Mail.message = `This is your new password : ${newPass}`;
+                        let result = await Mail.sendMail();
 
-                    res.status(200).json({ 'result': result })
+                        res.status(200).json({ 'result': result })
+                    }
                 }
             });
     }

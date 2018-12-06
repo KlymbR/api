@@ -9,6 +9,7 @@ export interface IUserService {
   getUsers(): Promise<Array<IUser>>;
   createUser(user: IUser): Promise<IUser>;
   updateUser(user: IUser): Promise<IUser>;
+  updatePassword(user: IUser): Promise<IUser>;
   getUser(id: string): Promise<IUser>;
   removeUser(id: string): Promise<number>;
   authenticateUser(email: string, pwd: string): Promise<IUserRet>;
@@ -50,6 +51,13 @@ export class UserService implements IUserService {
     return u;
   }
 
+  public async updatePassword(user: IUser): Promise<IUser> {
+    const u = await this.userRepository.updatePass(user);
+    u.password = undefined;
+    return u;
+  }
+
+
   public async getUser(id: string): Promise<IUser> {
     const user = await this.userRepository.find(id);
     user.password = undefined;
@@ -66,7 +74,6 @@ export class UserService implements IUserService {
 
   public async authenticateUser(email: string, pwd: string): Promise<IUserRet> {
     const user = await this.userRepository.findByEmail(email);
-    console.log(user);
     const res = await bcrypt.compare(pwd, user.password);
     user.password = undefined;
     if (res) {
