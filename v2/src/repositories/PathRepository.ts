@@ -19,6 +19,11 @@ export class PathRepository implements IPathRepository {
     }
 
     public async create(path: IPath): Promise<IPath> {
+        path.average = 0
+        path.best.firstname = 'None'
+        path.best.id = 'None'
+        path.best.lastname = 'None'
+        path.best.time = 1000000
         return await Database.connect().then(() => Database.Paths.create(path));
     }
 
