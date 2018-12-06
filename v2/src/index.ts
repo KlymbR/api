@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
-import * as cors from 'cors';
+//import * as cors from 'cors';
 import * as expresJwt from 'express-jwt';
 import TYPES from './types';
 import container from './inversify.config';
@@ -91,7 +91,7 @@ class Server {
   }
 
   private use() {
-    /*this.app.use(function (req, res, next) {
+    this.app.use(function (req, res, next) {
 
       // Website you wish to allow to connect
       res.setHeader('Access-Control-Allow-Origin', '*');
@@ -108,12 +108,12 @@ class Server {
 
       // Pass to next layer of middleware
       next();
-    });*/
+    });
     this.app.use(compression());
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json({ limit: '20mb' }));
     this.app.use(cookieParser());
-    this.app.use(cors());
+    //  this.app.use(cors());
     this.app.use(
       expresJwt({ secret: 'klymbrToken' }).unless({
         path: [

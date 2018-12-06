@@ -69,9 +69,9 @@ export class UserController implements IRegistrableController {
             })
         app.route('/users/passrecovery/')
             .post(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-                /*const user = await this.userService.authenticateUser(<string>req.body.email, <string>req.body.password).catch((err) => {
+                const user = await this.userService.getUser(<string>req.body.email).catch((err) => {
                     if (err === 404) { this.notFound(req, res); } else { next(err); }
-                })*/
+                });
                 const newPass = this.getRandomInt(9999);
                 /*Mail.to = "guive.jalili@epitech.eu";
                 Mail.subject = "l'anal";
