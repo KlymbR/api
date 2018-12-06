@@ -4,6 +4,8 @@ import TYPES from '../types';
 import { UserService } from '../services/UserService';
 import { IUser } from '../models/User';
 import { IRegistrableController } from './IRegistrableController';
+import Mail from "../utils/mail";
+
 
 @injectable()
 export class UserController implements IRegistrableController {
@@ -19,6 +21,10 @@ export class UserController implements IRegistrableController {
             error: 'not_found',
             error_description: `The user with the id '${id}' doesn't exist`
         });
+    }
+
+    private getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
     }
 
     public register(app: express.Application): void {
@@ -60,6 +66,19 @@ export class UserController implements IRegistrableController {
                     res.cookie('authToken', user.token);
                     res.status(200).json(user);
                 }
+            })
+        app.route('/users/passrecovery/')
+            .post(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+                /*const user = await this.userService.authenticateUser(<string>req.body.email, <string>req.body.password).catch((err) => {
+                    if (err === 404) { this.notFound(req, res); } else { next(err); }
+                })*/
+                const newPass = this.getRandomInt(9999);
+                /*Mail.to = "guive.jalili@epitech.eu";
+                Mail.subject = "l'anal";
+                Mail.message = "l'anal c'est trop bien";*/
+                let result = await Mail.sendMail();
+
+                res.status(200).json({ 'result': result })
             });
     }
 }
