@@ -35,6 +35,7 @@ export class RightRepository implements IRightRepository {
     public async find(email: string): Promise<IRights> {
         console.log(email);
         const rights: IRights | null = await Database.connect().then(() => Database.Rights.findOne({ email: email }));
+        console.log(rights);
         if (rights === null) { throw 404; }
         return rights;
     }

@@ -43,7 +43,7 @@ export class RightController implements IRegistrableController {
                 if (updateRights) { res.status(200).json(updateRights); }
             })
             .get(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-                const rights = await this.rightService.getRights(req.body.email).catch(err => {
+                const rights = await this.rightService.getRights(req.params.email).catch(err => {
                     if (err === 404) { this.notFound(req, res); } else { next(err) }
                 });
                 if (rights) { res.status(200).json(rights); }
