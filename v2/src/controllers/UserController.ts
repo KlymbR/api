@@ -4,7 +4,7 @@ import TYPES from '../types';
 import { UserService } from '../services/UserService';
 import { IUser } from '../models/User';
 import { IRegistrableController } from './IRegistrableController';
-import Mail from "../utils/mail";
+import Mail from "../utils/Mail";
 
 
 @injectable()
@@ -69,16 +69,18 @@ export class UserController implements IRegistrableController {
             })
         app.route('/users/passrecovery/')
             .post(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-                const user = await this.userService.getUser(<string>req.body.email).catch((err) => {
+                const user = await this.userService.getUserByEmail(<string>req.body.email).catch((err) => {
                     if (err === 404) { this.notFound(req, res); } else { next(err); }
                 });
-                const newPass = this.getRandomInt(9999);
-                /*Mail.to = "guive.jalili@epitech.eu";
-                Mail.subject = "l'anal";
-                Mail.message = "l'anal c'est trop bien";*/
-                let result = await Mail.sendMail();
+                if (user) {
+                    const newPass = this.getRandomInt(9999);
+                    Mail.to = user.email;
+                    Mail.subject = "Password Recovery";
+                    Mail.message = `This is your new password : ${newPass}`;
+                    let result = await Mail.sendMail();
 
-                res.status(200).json({ 'result': result })
+                    res.status(200).json({ 'result': result })
+                }
             });
     }
 }

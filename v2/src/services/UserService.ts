@@ -60,6 +60,10 @@ export class UserService implements IUserService {
     return await this.userRepository.remove(id);
   }
 
+  public async getUserByEmail(email: string): Promise<IUser> {
+    return await this.userRepository.findByEmail(email);
+  }
+
   public async authenticateUser(email: string, pwd: string): Promise<IUserRet> {
     const user = await this.userRepository.findByEmail(email);
     console.log(user);
