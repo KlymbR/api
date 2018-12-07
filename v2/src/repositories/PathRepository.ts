@@ -37,6 +37,7 @@ export class PathRepository implements IPathRepository {
         if (path.difficulty) { stored.difficulty = path.difficulty }
         if (path.grips) { stored.grips = path.grips }
         if (path.average) { stored.average = path.average }
+        if (path.color) { stored.color = path.color }
         if (path.best) {
             if (path.best.time) { stored.best.time = path.best.time }
             if (path.best.firstname) { stored.best.firstname = path.best.firstname }
