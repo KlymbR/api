@@ -11,10 +11,10 @@ import { Timestamp } from 'bson';
 
 export interface IRights {
     _id?: string;
-    room?: string;
-    path?: string;
-    administration?: string;
-    email?: string;
+    room: string;
+    path: string;
+    administration: string;
+    email: string;
 }
 
 @Index({ name: 4 })

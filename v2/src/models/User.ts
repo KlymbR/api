@@ -10,16 +10,16 @@ import {
 import { Timestamp } from 'bson';
 
 interface IClub {
-  id?: number;
-  name?: string;
+  id: number;
+  name: string;
 }
 
 interface ILicense {
   id?: number;
-  number?: number;
-  end?: Date;
-  status?: number;
-  club?: IClub;
+  number: number;
+  end: Date;
+  status: number;
+  club: IClub;
 }
 
 interface ITshirt {
@@ -29,23 +29,23 @@ interface ITshirt {
 }
 
 interface IAddress {
-  number?: number;
-  street?: string;
-  postalcode?: number;
-  city?: string;
+  number: number;
+  street: string;
+  postalcode: number;
+  city: string;
 }
 
 export interface IUser {
   _id?: string;
-  firstname?: string;
-  lastname?: string;
-  phone?: string;
-  gender?: number;
-  birthdate?: Date;
-  email?: string;
+  firstname: string;
+  lastname: string;
+  phone: string;
+  gender: number;
+  birthdate: Date;
+  email: string;
   password?: string;
-  licenses?: Array<ILicense>;
-  address?: IAddress;
+  licenses: Array<ILicense>;
+  address: IAddress;
   created?: Date;
 }
 

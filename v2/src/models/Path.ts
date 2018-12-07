@@ -10,8 +10,8 @@ import {
 
 interface IGrip {
     id?: number;
-    data?: number;
-    on?: boolean;
+    data: number;
+    on: boolean;
 }
 
 interface IBest {
@@ -23,12 +23,12 @@ interface IBest {
 
 export interface IPath {
     _id?: string;
-    free?: boolean;
-    difficulty?: string;
-    color?: string;
-    grips?: Array<IGrip>;
-    average?: Number;
-    best?: IBest;
+    free: boolean;
+    difficulty: string;
+    color: string;
+    grips: Array<IGrip>;
+    average: Number;
+    best: IBest;
 }
 
 @Index({ name: 1 })
