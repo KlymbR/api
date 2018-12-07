@@ -10,42 +10,42 @@ import {
 import { Timestamp } from 'bson';
 
 interface IClub {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
 }
 
 interface ILicense {
-  id: number;
-  number: number;
-  end: Date;
-  status: number;
-  club: IClub;
+  id?: number;
+  number?: number;
+  end?: Date;
+  status?: number;
+  club?: IClub;
 }
 
 interface ITshirt {
-  freq: number;
-  altitude: number;
-  timestamp: Date;
+  freq?: number;
+  altitude?: number;
+  timestamp?: Date;
 }
 
 interface IAddress {
-  number: number;
-  street: string;
-  postalcode: number;
-  city: string;
+  number?: number;
+  street?: string;
+  postalcode?: number;
+  city?: string;
 }
 
 export interface IUser {
   _id?: string;
-  firstname: string;
-  lastname: string;
-  phone: string;
-  gender: number;
-  birthdate: Date;
-  email: string;
-  password: string;
-  licenses: Array<ILicense>;
-  address: IAddress;
+  firstname?: string;
+  lastname?: string;
+  phone?: string;
+  gender?: number;
+  birthdate?: Date;
+  email?: string;
+  password?: string;
+  licenses?: Array<ILicense>;
+  address?: IAddress;
   created?: Date;
 }
 

@@ -9,26 +9,26 @@ import {
 } from 'iridium';
 
 interface IGrip {
-    id: number;
-    data: number;
-    on: boolean;
+    id?: number;
+    data?: number;
+    on?: boolean;
 }
 
 interface IBest {
-    time: number;
-    firstname: string;
-    lastname: string;
-    id: string;
+    time?: number;
+    firstname?: string;
+    lastname?: string;
+    id?: string;
 }
 
 export interface IPath {
     _id?: string;
-    free: boolean;
-    difficulty: string;
-    color: string;
-    grips: Array<IGrip>;
-    average: Number;
-    best: IBest;
+    free?: boolean;
+    difficulty?: string;
+    color?: string;
+    grips?: Array<IGrip>;
+    average?: Number;
+    best?: IBest;
 }
 
 @Index({ name: 1 })

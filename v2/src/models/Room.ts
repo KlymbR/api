@@ -10,9 +10,9 @@ import {
 
 export interface IRoom {
     _id?: string;
-    title: string;
-    latitude: number;
-    longitude: number;
+    title?: string;
+    latitude?: number;
+    longitude?: number;
 }
 
 @Index({ name: 2 })
