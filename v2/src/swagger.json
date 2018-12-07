@@ -868,6 +868,9 @@
         "difficulty": {
           "type": "string"
         },
+        "color": {
+          "type": "string"
+        },
         "grips": {
           "type": "array",
           "items": {
@@ -917,6 +920,9 @@
           "type": "boolean"
         },
         "difficulty": {
+          "type": "string"
+        },
+        "color": {
           "type": "string"
         },
         "grips": {
