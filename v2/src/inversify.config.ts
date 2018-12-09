@@ -12,10 +12,6 @@ import { RoomController } from './controllers/RoomController';
 import { RoomService } from './services/RoomService';
 import { RoomRepository } from './repositories/RoomRepository';
 
-import { PathController } from './controllers/PathController';
-import { PathService } from './services/PathService';
-import { PathRepository } from './repositories/PathRepository';
-
 import { RightController } from './controllers/RightController';
 import { RightService } from './services/RightService';
 import { RightRepository } from './repositories/RightRepository';
@@ -29,10 +25,6 @@ container.bind<UserRepository>(TYPES.UserRepository).to(UserRepository);
 container.bind<IRegistrableController>(TYPES.Controller).to(RoomController);
 container.bind<RoomService>(TYPES.RoomService).to(RoomService);
 container.bind<RoomRepository>(TYPES.RoomRepository).to(RoomRepository);
-
-container.bind<IRegistrableController>(TYPES.Controller).to(PathController);
-container.bind<PathService>(TYPES.PathService).to(PathService);
-container.bind<PathRepository>(TYPES.PathRepository).to(PathRepository);
 
 container.bind<IRegistrableController>(TYPES.Controller).to(RightController);
 container.bind<RightService>(TYPES.RightService).to(RightService);

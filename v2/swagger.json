@@ -5,9 +5,8 @@
     "version": "2.0.0"
   },
   "host": "api.klymbr.com",
-  "basePath": "/",
+  "basePath": "/v2",
   "schemes": [
-    "https",
     "http"
   ],
   "produces": [
@@ -23,41 +22,6 @@
     }
   ],
   "paths": {
-    "/users/authenticate": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Authenticate user",
-        "description": "Authenticate user",
-        "operationId": "AuthUser",
-        "parameters": [
-          {
-            "name": "User",
-            "in": "body",
-            "description": "Personnal informations of new user",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/userAuth"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "logged",
-            "schema": {
-              "$ref": "#/definitions/userAuthResponse"
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/users": {
       "get": {
         "tags": [
@@ -83,12 +47,6 @@
               "items": {
                 "$ref": "#/definitions/UserResponse"
               }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -123,12 +81,6 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/UserResponse"
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -259,12 +211,12 @@
         }
       }
     },
-    "/paths": {
+    "/rooms/:idroom/paths": {
       "get": {
         "tags": [
           "Path"
         ],
-        "summary": "Get all paths",
+        "summary": "Get all room paths",
         "description": "Give an array with paths informations",
         "operationId": "getAllPaths",
         "parameters": [
@@ -285,12 +237,6 @@
                 "$ref": "#/definitions/PathResponse"
               }
             }
-          },
-          "404": {
-            "description": "Not found",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         }
       },
@@ -298,7 +244,7 @@
         "tags": [
           "Path"
         ],
-        "summary": "Post a new path",
+        "summary": "Post a new room path",
         "description": "Create a new path",
         "operationId": "postPath",
         "parameters": [
@@ -329,7 +275,7 @@
         }
       }
     },
-    "/paths/:id": {
+    "/rooms/:idroom/paths/:idpath": {
       "get": {
         "tags": [
           "Path"
@@ -654,9 +600,6 @@
         "lastname": {
           "type": "string"
         },
-        "password": {
-          "type": "string"
-        },
         "phone": {
           "type": "string"
         },
@@ -719,21 +662,22 @@
           }
         },
         "tshirt": {
-          "type": "array",
-          "items": {
-            "properties": {
-              "freq": {
-                "type": "number"
-              },
-              "altitude": {
-                "type": "number"
-              },
-              "timestamp": {
-                "type": "string",
-                "format": "date-time"
-              }
+          "type": "object",
+          "properties": {
+            "freq": {
+              "type": "number"
+            },
+            "altitude": {
+              "type": "number"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
             }
           }
+        },
+        "isAdmin": {
+          "type": "boolean"
         }
       }
     },
@@ -811,48 +755,26 @@
           }
         },
         "tshirt": {
-          "type": "array",
-          "items": {
-            "properties": {
-              "freq": {
-                "type": "number"
-              },
-              "altitude": {
-                "type": "number"
-              },
-              "timestamp": {
-                "type": "string",
-                "format": "date-time"
-              }
+          "type": "object",
+          "properties": {
+            "freq": {
+              "type": "number"
+            },
+            "altitude": {
+              "type": "number"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
             }
           }
+        },
+        "isAdmin": {
+          "type": "boolean"
         },
         "created": {
           "type": "string",
           "format": "date-time"
-        }
-      }
-    },
-    "userAuth": {
-      "type": "object",
-      "properties": {
-        "email": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        }
-      }
-    },
-    "userAuthResponse": {
-      "type": "object",
-      "properties": {
-        "user": {
-          "type": "object",
-          "$ref": "#/definitions/User"
-        },
-        "token": {
-          "type": "string"
         }
       }
     },
@@ -862,13 +784,13 @@
         "_id": {
           "type": "string"
         },
+        "name": {
+          "type": "string"
+        },
         "free": {
           "type": "boolean"
         },
         "difficulty": {
-          "type": "string"
-        },
-        "color": {
           "type": "string"
         },
         "grips": {
@@ -916,13 +838,13 @@
         "_id": {
           "type": "string"
         },
+        "name": {
+          "type": "string"
+        },
         "free": {
           "type": "boolean"
         },
         "difficulty": {
-          "type": "string"
-        },
-        "color": {
           "type": "string"
         },
         "grips": {
@@ -994,7 +916,7 @@
           "type": "number"
         },
         "longitude": {
-          "type": "object"
+          "type": "number"
         }
       }
     },

@@ -7,7 +7,6 @@ import {
     Property,
     ObjectID
 } from 'iridium';
-import { Timestamp } from 'bson';
 
 export interface IRights {
     _id?: string;
