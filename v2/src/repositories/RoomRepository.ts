@@ -79,7 +79,7 @@ export class RoomRepository implements IRoomRepository {
         const room: RoomSchema | null = await Database.connect().then(() => Database.Rooms.findOne(idroom));
         if (room === null) { throw 404; }
         let stored = null;
-        for (let i in room.paths) { if (room.paths[i]._id === idpath) {stored = room.paths[i]} }
+        for (let i in room.paths) { if (String(room.paths[i]._id) === idpath) {stored = room.paths[i]} }
         if (stored === null) { throw 404; }
         // undefined isn't handled by mongo, so set to null
         if (path.name) { stored.name = path.name }
@@ -94,7 +94,7 @@ export class RoomRepository implements IRoomRepository {
             if (path.best.lastname) { stored.best.lastname = path.best.lastname }
             if (path.best.id) { stored.best.id = path.best.id }
         }
-        for (let i in room.paths) { if (room.paths[i]._id === idpath) {room.paths[i] = stored} }
+        for (let i in room.paths) { if (String(room.paths[i]._id) === idpath) {room.paths[i] = stored} }
         this.update(room)
         return stored;
     }
@@ -109,7 +109,8 @@ export class RoomRepository implements IRoomRepository {
         const room: IRoom | null = await Database.connect().then(() => Database.Rooms.findOne(idroom));
         if (room === null) { throw 404; }
         let path = null;
-        for (let i in room.paths) { if (room.paths[i]._id === idpath) {path = room.paths[i]} }
+        for (let i in room.paths) { if (String(room.paths[i]._id) === idpath) {path = room.paths[i]} }
+        console.log(path)
         if (path === null) { throw 404; }
         return path;
     }
@@ -124,10 +125,10 @@ export class RoomRepository implements IRoomRepository {
         const room: RoomSchema | null = await Database.connect().then(() => Database.Rooms.findOne(idroom));
         if (room === null) { throw 404; }
         let path = null;
-        for (let i in room.paths) { if (room.paths[i]._id === idpath) {path = room.paths[i]} }
+        for (let i in room.paths) { if (String(room.paths[i]._id) === idpath) {path = room.paths[i]} }
         if (path === null) { throw 404; }
         Database.Rooms.update(
-            {'_id': idroom}, 
+            {'_id': idroom},
             { $pull: { paths : { _id: idpath } } });
         return 200;
     }
