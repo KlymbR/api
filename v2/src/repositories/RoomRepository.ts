@@ -82,8 +82,8 @@ export class RoomRepository implements IRoomRepository {
         for (let i in room.paths) { if (String(room.paths[i]._id) === idpath) {stored = room.paths[i]} }
         if (stored === null) { throw 404; }
         // undefined isn't handled by mongo, so set to null
-        if (path.name) { stored.name = path.name }
-        if (path.free) { stored.free = path.free }
+	if (path.name) { stored.name = path.name }
+	if ('free' in path) { stored.free = path.free }
         if (path.difficulty) { stored.difficulty = path.difficulty }
         if (path.grips) { stored.grips = path.grips }
         if (path.average) { stored.average = path.average }
