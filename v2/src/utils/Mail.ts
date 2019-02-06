@@ -23,7 +23,7 @@ class Mail {
                 secure: false,
                 auth: {
                     user: "guive.jalili@epitech.eu",
-                    pass: "***REMOVED***"
+                    pass: ";>D38z,D"
                 },
                 tls: { rejectUnauthorized: false }
             });
