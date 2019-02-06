@@ -27,7 +27,7 @@ export class UserService implements IUserService {
 
   private rebuildDate(user: IUser): IUser {
     user.birthdate = new Date(user.birthdate);
-    user.licenses.forEach(l => (l.end = new Date(l.end)));
+    if (user.licenses) user.licenses.forEach(l => (l.end = new Date(l.end)));
     return user;
   }
 
@@ -35,6 +35,7 @@ export class UserService implements IUserService {
     const users = await this.userRepository.findAll();
     return users.map(u => {
       u.password = undefined;
+      u.tshirt.sort((a, b) => a.timestamp < b.timestamp ? -1 : a.timestamp > b.timestamp ? 1 : 0);
       return u;
     });
   }
@@ -42,18 +43,21 @@ export class UserService implements IUserService {
   public async createUser(user: IUser): Promise<IUser> {
     const u = await this.userRepository.create(this.rebuildDate(user));
     u.password = undefined;
+    u.tshirt.sort((a, b) => a.timestamp < b.timestamp ? -1 : a.timestamp > b.timestamp ? 1 : 0);
     return u;
   }
 
   public async updateUser(user: IUser): Promise<IUser> {
     const u = await this.userRepository.update(this.rebuildDate(user));
     u.password = undefined;
+    u.tshirt.sort((a, b) => a.timestamp < b.timestamp ? -1 : a.timestamp > b.timestamp ? 1 : 0);
     return u;
   }
 
   public async updatePassword(user: IUser): Promise<IUser> {
     const u = await this.userRepository.updatePass(user);
     u.password = undefined;
+    u.tshirt.sort((a, b) => a.timestamp < b.timestamp ? -1 : a.timestamp > b.timestamp ? 1 : 0);
     return u;
   }
 
@@ -61,6 +65,7 @@ export class UserService implements IUserService {
   public async getUser(id: string): Promise<IUser> {
     const user = await this.userRepository.find(id);
     user.password = undefined;
+    user.tshirt.sort((a, b) => a.timestamp < b.timestamp ? -1 : a.timestamp > b.timestamp ? 1 : 0);
     return user;
   }
 
@@ -69,13 +74,17 @@ export class UserService implements IUserService {
   }
 
   public async getUserByEmail(email: string): Promise<IUser> {
-    return await this.userRepository.findByEmail(email);
+    const user = await this.userRepository.findByEmail(email);
+    user.password = undefined;
+    user.tshirt.sort((a, b) => a.timestamp < b.timestamp ? -1 : a.timestamp > b.timestamp ? 1 : 0);
+    return user;
   }
 
   public async authenticateUser(email: string, pwd: string): Promise<IUserRet> {
     const user = await this.userRepository.findByEmail(email);
     const res = await bcrypt.compare(pwd, user.password);
     user.password = undefined;
+    user.tshirt.sort((a, b) => a.timestamp < b.timestamp ? -1 : a.timestamp > b.timestamp ? 1 : 0);
     if (res) {
       const token = await jwt.sign(
         { firstname: user.firstname, id: user._id },

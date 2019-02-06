@@ -46,6 +46,7 @@ export interface IUser {
   password?: string;
   licenses: Array<ILicense>;
   address: IAddress;
+  tshirt: Array<ITshirt>;
   created?: Date;
 }
 
