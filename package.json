@@ -24,7 +24,7 @@
       "resolved": "https://registry.npmjs.org/async/-/async-2.1.4.tgz",
       "version": "2.1.4"
     },
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "bcrypt": "^2.0.1",
     "bluebird": {
       "integrity": "sha1-eRQg1/VR7qKJdFOop3ZT+WYG1nw=",
