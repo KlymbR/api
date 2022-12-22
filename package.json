@@ -193,7 +193,7 @@
       "resolved": "https://registry.npmjs.org/ipaddr.js/-/ipaddr.js-1.5.2.tgz",
       "version": "1.5.2"
     },
-    "jsonwebtoken": "^8.2.1",
+    "jsonwebtoken": "^9.0.0",
     "kareem": {
       "integrity": "sha512-WloXk3nyByx9FEB5WY7WFEXIZB/QA+zy7c2kJMjnZCebjepEyQcJzazgLiKcTS/ltZeEoeEQ1A1pau1fEDlnIA==",
       "resolved": "https://registry.npmjs.org/kareem/-/kareem-2.0.3.tgz",
